@@ -6,6 +6,8 @@ import configureStore from "./redux/store";
 import IntroScreen from "./screens/IntroScreen";
 import AuthScreen from "./screens/AuthScreen";
 import PinScreen from "./screens/PinScreen";
+import THook from "./screens/THook";
+import Timetable from "./screens/Timetable";
 
 
 //Screens
@@ -25,6 +27,8 @@ export default function RootNavigation() {
           <Stack.Screen name="IntroScreen" component={IntroScreen} /> 
           <Stack.Screen name="AuthScreen" component={AuthScreen} /> 
           <Stack.Screen name="PinScreen" component={PinScreen} /> 
+          <Stack.Screen name="THook" component={THook} /> 
+          <Stack.Screen name="Timetable" component={Timetable} /> 
         </Stack.Navigator>
       
       </NavigationContainer>

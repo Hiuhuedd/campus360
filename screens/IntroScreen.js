@@ -13,6 +13,7 @@ function IntroScreen({navigation}) {
     AsyncStorage.getItem('Student').then(value => {
             if (value !== null) {
               setloader(true)
+              console.log(value);
               dispatch({
                 type: "ON_USER",
                 payload:JSON.parse(value)

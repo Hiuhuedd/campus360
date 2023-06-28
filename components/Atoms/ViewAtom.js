@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
  const ViewAtom=(props)=>{
-    const {fd,w,jc,ai,pv,ph,bg,br,mv,mh}=props
+    const {fd,w,jc,ai,pv,ph,bg,br,mv,mh,fw}=props
   const [loaded] = useFonts({
     Poppins: require('../../assets/fonts/Poppins-Regular.ttf'),
     Poppins1: require('../../assets/fonts/Poppins-Black.ttf'),
@@ -27,7 +27,8 @@ import { useFonts } from 'expo-font';
         backgroundColor:bg,
         borderRadius:br,
         marginVertical:mv,
-        marginHorizontal:mh
+        marginHorizontal:mh,
+        flexWrap:fw
         }}>
       {props.children}
       </View>
