@@ -1,5 +1,5 @@
 import React ,{useState,useEffect, useRef}from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, Platform,TextInput, TouchableWithoutFeedback, } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, TouchableWithoutFeedback, } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import appTheme from '../../constants/theme';
 import ViewAtom from '../Atoms/ViewAtom';
@@ -8,7 +8,7 @@ import { Icon } from 'react-native-elements';
 import MyInput from '../Atoms/MyInput';
 import { RadioButton } from 'react-native-paper';
 import CardAtom from '../Atoms/CardAtom';
-// import PopUp from './PopUp';
+import PopUp from './PopUp';
 import { ProgramsArray } from '../../constants/content/programs';
 import { updateTimetableSlot } from '../../utils/timetable';
 import { useDispatch } from 'react-redux';
@@ -21,13 +21,12 @@ const AddClass= React.forwardRef(({slot,handleAddClass}, ref) => {
       
       for (const year in programUnits) {
         const semesters = programUnits[year];
+        console.log(semesters);
         
         for (const semester in semesters) {
           const units = semesters[semester];
-          
           for (const unit of units) {
             if (unit.unitCode === unitCode) {
-              alert(unit.unitName)
               setClassName(unit.unitName)
               return unit;
             }
@@ -41,14 +40,12 @@ const AddClass= React.forwardRef(({slot,handleAddClass}, ref) => {
   
 
   const locationArr = [
-    "Science Complex",
-    "SZ39",
-    "OLM",
-    "Education",
-    "Economics",
-    "SOM",
-    
- 
+    { location: "Science Complex", longitude: 123.456, latitude: 78.901 },
+    { location: "SZ39", longitude: 234.567, latitude: 89.012 },
+    { location: "OLM", longitude: 345.678, latitude: 90.123 },
+    { location: "Education", longitude: 456.789, latitude: 12.345 },
+    { location: "Economics", longitude: 567.890, latitude: 23.456 },
+    { location: "SOM", longitude: 678.901, latitude: 34.567 },
   ];
 
   const [ClassObj, setClassObj]=useState({})
@@ -57,10 +54,11 @@ const AddClass= React.forwardRef(({slot,handleAddClass}, ref) => {
   }
  
   const [broadcast, setValue] = React.useState(true);
-  const [location, setlocation] = React.useState(locationArr[0]);
+  const [location, setlocation] = React.useState(locationArr[0].location);
   const [ClassName, setClassName] = React.useState('');
   const [UnitCode, setUnitCode] = React.useState('');
   const [professor, setprofessor] = React.useState('');
+  const [Loading, setLoading] = React.useState(false);
 
   useEffect(() => {
     setClassObj({UnitCode,ClassName,location,broadcast,professor,slot})
@@ -73,7 +71,8 @@ const AddClass= React.forwardRef(({slot,handleAddClass}, ref) => {
 const dispatch = useDispatch();
 
   const handleUpdate=  async()=>{
-   const timetableUpdate= await  updateTimetableSlot(slot.day,slot.index, {
+    setLoading(true)
+   const timetableUpdate=  await updateTimetableSlot(slot.day,slot.index, {
       unitCode:UnitCode,
       unitName:ClassName,
       start:slot.start,
@@ -82,16 +81,18 @@ const dispatch = useDispatch();
       index:slot.index,
       location:location
     })
-    console.log(timetableUpdate[0]);
     if(timetableUpdate){
+        console.log("here");
       dispatch({
         type: "MY_TIMETABLE",
         payload:timetableUpdate
       });
-      // MY_TIMETABLE
       AsyncStorage.setItem('myTimetable', JSON.stringify(timetableUpdate)).then(res=>{
         console.log("set");
-        handleAddClass()
+        setTimeout(() => {
+            setLoading(false)
+            handleAddClass()
+        }, 3000);
       })
     }
 
@@ -129,9 +130,7 @@ const dispatch = useDispatch();
 
             <TextAtom text="Unit Code" c={COLORS.white} f="Poppins" s={SIZES.h5} w="500"/>
             <MyInput editable={true} keyboardType="default" secureTextEntry={false} style={styles.input} placeholder={`ECU100`} maxLength={6} setisUpdated={(ex)=>{setUnitCode(ex)}} index={0} />
-            {/* <TextAtom text="Unit Name" c={COLORS.white} f="Poppins" s={SIZES.h5} w="500"/>
-            <MyInput editable={true} keyboardType="default" secureTextEntry={false} style={styles.input} placeholder={`Mathematics II`} maxLength={40} setisUpdated={(ex)=>{setClassName(ex)}} index={0} /> */}
-            <TextAtom text="Unit Professor" c={COLORS.white} f="Poppins" s={SIZES.h5} w="500"/>
+         <TextAtom text="Unit Professor" c={COLORS.white} f="Poppins" s={SIZES.h5} w="500"/>
             <MyInput editable={true} keyboardType="default" secureTextEntry={false} style={styles.input} placeholder={`Dr. Karen`} maxLength={40} setisUpdated={(ex)=>{setprofessor(ex)}} index={0} />
 
             <TextAtom text="Should Your classmates see this update?" c={COLORS.gray} f="Poppins" s={SIZES.base} w="500"/>
@@ -161,13 +160,13 @@ const dispatch = useDispatch();
                 <ViewAtom fd="row" jc="space-between" ai="center" w="100%" pv={0} ph={5} bg="transparent" br={0} mv={0} mh={0}>
                 <Icon  name="navigate-circle" type='ionicon' color={COLORS.primary} size={SIZES.h2}/>
 
-                <ViewAtom fd="column" jc="flex-start" ai="center" pv={5} ph={5} bg="transparent" br={0} mv={0} mh={0}>
+                <ViewAtom fd="column" jc="center" ai="flex-end"bg="" w={"25%"} br={0} mv={10} mh={0}>
 
                  <TextAtom text="Venue" c={COLORS.primary} f="Poppins" s={SIZES.base} w="500"/>
                  <TextAtom text={` ${location}`} c={COLORS.primary} f="Poppins" s={SIZES.base} w="500"/>
 
                 </ViewAtom>
-             {/* <PopUp handleSetItem={handleSetLocation} arr={locationArr} /> */}
+             <PopUp handleSetItem={handleSetLocation} arr={locationArr} />
             
                 </ViewAtom>
             </CardAtom>
@@ -179,7 +178,8 @@ const dispatch = useDispatch();
 
       <ViewAtom w="100%" mv={20} mh={0}ai="center" >
      <TouchableOpacity style={styles.btn} onPress={ ()=>{ handleUpdate() } }  >
-            <TextAtom text="Add Class" c={COLORS.primary} f="Poppins" s={SIZES.h5} w="500"/>
+{    Loading?<ActivityIndicator size="small" color={COLORS.primary} />:    
+            <TextAtom text="Add Class" c={COLORS.primary} f="Poppins" s={SIZES.h5} w="500"/>}
     </TouchableOpacity>
          </ViewAtom>
                         

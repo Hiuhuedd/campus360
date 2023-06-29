@@ -8,7 +8,6 @@ import TextAtom from '../components/Atoms/TextAtom';
 import { ALERT_TYPE, Dialog, AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ViewAtom from '../components/Atoms/ViewAtom';
-import Feather from 'react-native-vector-icons/Feather';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
 import MyInput from '../components/Atoms/MyInput';
 import { Button } from '../components/Atoms/Button';
@@ -128,7 +127,7 @@ const AuthScreen = () => {
    
       
         </ViewAtom>
-        {/* <Button text={"next"}width={"100%"}bg={COLORS.amber} onMethodSelected={()=>{}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} /> */}
+  
         <ViewAtom ai="center"  pv={10} ph={0} bg="transparent" br={0} mv={0} mh={0}>
                   {!Loading? <Button text={txt} width="100%" bg={btnColors[activeIndex]} borderRadius={10} screen="BookingTwo" onMethodSelected={handleNext} />:
                    <CardAtom fd="column" jc="center" ai="center" w="100%" pv={15} ph={10} bg={btnColors[activeIndex]} br={10} mv={0} mh={0}   el={3} sh='#525252' >

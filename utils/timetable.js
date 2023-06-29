@@ -21,9 +21,10 @@ export const timetable = daysOfWeek.map((day) => {
 });
 
 // Update timetable slots with actual classes
-export const updateTimetableSlot = (dayIndex, hourIndex, slotData) => {
+export const updateTimetableSlot = async(dayIndex, hourIndex, slotData) => {
   const slot = timetable[dayIndex].slots[hourIndex];
   Object.assign(slot, slotData);
+  return timetable
 };
 
 // Example usage

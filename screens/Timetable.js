@@ -5,20 +5,24 @@ import Carousel from 'react-native-reanimated-carousel';
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import ViewAtom from '../components/Atoms/ViewAtom';
-import { timetable, updateTimetableSlot } from '../utils/timetable';
+// import { timetable, updateTimetableSlot } from '../utils/timetable';
 import CardAtom from '../components/Atoms/CardAtom';
 import { ScrollView } from 'react-native-gesture-handler';
 import AddClass from '../components/Molecules/AddClass';
 import { useDispatch, useSelector } from 'react-redux';
+import BottomTabs from '../components/Molecules/BottomTabs';
+import { getProgramByCode } from '../utils/helper';
 
 
 const width = Dimensions.get('window').width;
   const height = Dimensions.get('window').height;
   
 
-  
+ 
   
   const DayView = React.memo(({ dayObj,updatedTimetable }) => {
+    const user=useSelector(state => state.userReducer.user);
+
   //==============================BOTTOM SHEET============================
   const [TappedSlot,setTappedSlot]=useState({})
   const closeSheet = (t) => {
@@ -51,10 +55,17 @@ const width = Dimensions.get('window').width;
 
 
    
-
+console.log(user);
 
   return (
-    <View style={{marginTop:10}}>
+    <View style={{marginTop:0}}>
+                  <ViewAtom fd="row" jc="space-between" ai="flex-start" w="90%" bg="transparent" pv={0} br={0} mv={0} mh={0}>
+      {/* <TextAtom text={user.ProgramId} c={COLORS.gray4} f="Poppins" s={SIZES.h3} w="500" ls={-1} /> */}
+      {/* <CardAtom fd="column" jc="center" ai="center"   pv={3} ph={3} bg={COLORS.green} br={50} mv={5} mh={3}   el={3} sh='#525252' ></CardAtom> */}
+      <TextAtom text={getProgramByCode(user.ProgramId).programName} c={COLORS.gray4} f="Poppins" s={SIZES.h5} w="500" ls={-1} />
+                  </ViewAtom>
+
+
      <TextAtom text={`${dayObj.day}s`} c={COLORS.white} f="Poppins" s={SIZES.h1} w="500" ls={-2} />
      <TextAtom text={'Tap on empty slots to add classes.'} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" ls={0} />
 
@@ -97,7 +108,7 @@ const width = Dimensions.get('window').width;
 });
 
 function Timetable({ navigation }) {
-    const user=useSelector(state => state.userReducer.user);
+    const timetable=useSelector(state => state.userReducer.timetable);
 
   const ref = useRef(null);
     const [activeIndex,setActiveIndex]=useState(0)
@@ -109,24 +120,15 @@ function Timetable({ navigation }) {
 
      
   return (
-    <View style={{backgroundColor:COLORS.black,flex:1, paddingTop: 45, padding: 15,height,}}>
-             <TextAtom text={user.programCode} c={COLORS.gray4} f="Poppins" s={SIZES.h3} w="500" ls={-1} />
-      <View   style={{height:25,}}>
-
-           {/* <CardAtom fd="column" jc="center" ai="center" w={width/8}  pv={2} ph={0} bg={COLORS.green} br={7} mv={0} mh={1}   el={3} sh='#525252' >
-
-              
-
-             
-           </CardAtom> */}
-      </View>
+    <View style={{backgroundColor:COLORS.black,flex:1, paddingTop: 35, padding: 15,height,}}>
+         
 
 
       <Carousel
         ref={ref}
         loop={true}
         width={width}
-        height={height-100}
+        height={height-80}
         autoPlay={false}
         data={updatedTimetable}
         scrollAnimationDuration={1000}
@@ -135,7 +137,7 @@ function Timetable({ navigation }) {
         }}
         renderItem={({ item: dayObj }) => <DayView dayObj={dayObj}  updatedTimetable={updatedTimetable} />}
       />
-
+<BottomTabs navigation={navigation} />
     </View>
   );
 }

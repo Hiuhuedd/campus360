@@ -1,6 +1,7 @@
 import { BASE_URL } from "./index"
 import * as Location from 'expo-location'
 import { GOOGLE_MAP_KEY } from './index';
+import { ProgramsArray } from "../constants/content/programs";
 
 
 
@@ -37,64 +38,11 @@ export const getDatesAndDays= () => {
   return datesAndDays;
 }
 
-function getOrdinalSuffix(day) {
-  const j = day % 10;
-  const k = day % 100;
-
-  if (j === 1 && k !== 11) {
-    return "st";
-  }
-
-  if (j === 2 && k !== 12) {
-    return "nd";
-  }
-
-  if (j === 3 && k !== 13) {
-    return "rd";
-  }
-
-  return "th";
-}
-export const analyzeFinancialData=(data)=> {
-  const income = parseInt(data.income);
-  const expenses = parseInt(data.expenses);
-  const debtRepayments = parseInt(data["debt repayments"]);
-  const savings = parseInt(data.savings);
-  const cashInHand = parseInt(data["cash in hand"]);
-
-  const monthlyNetIncome = income - expenses - debtRepayments - savings;
-
-  let color;
-
-  if (monthlyNetIncome >= 20000) {
-    color = 0;
-  } else if (monthlyNetIncome >= 10000 && monthlyNetIncome < 20000) {
-    color = 1;
-  } else if (monthlyNetIncome >= 5000 && monthlyNetIncome < 10000) {
-    color = 2;
-  } else {
-    color = 3;
-  }
-
-  if (cashInHand > 0.1 * income) {
-    if (color === 0) {
-      color = 1;
-    } else if (color === 1) {
-      color = 2;
-    } else if (color === 2) {
-      color = 3;
+export const getProgramByCode=(programCode)=> {
+  for (let i = 0; i < ProgramsArray.length; i++) {
+    if (ProgramsArray[i].programCode === programCode) {
+        return (ProgramsArray[i]) 
     }
   }
-
-  if (debtRepayments > 0.3 * income) {
-    if (color === 1) {
-      color = 0;
-    } else if (color === 2) {
-      color = 1;
-    } else if (color === 3) {
-      color = 2;
-    }
-  }
-
-  return color;
+  return(null)
 }

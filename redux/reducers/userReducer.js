@@ -1,6 +1,7 @@
+import { timetable } from "../../utils/timetable";
 
 let defaultState = {
-    theme: true,
+    timetable: timetable,
     user: {},
     location: {},
   };
@@ -24,10 +25,10 @@ const UserReducer = (state = defaultState, action) => {
                 user: payload    
             }
     
-        case 'ON_THEME_CHANGE':
+        case 'MY_TIMETABLE':
             return {
                 ...state,
-                theme: payload    
+                timetable: payload    
             }
               
 

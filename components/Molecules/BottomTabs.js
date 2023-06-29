@@ -5,6 +5,9 @@ import { Badge } from "react-native-elements";
 import { useSelector } from "react-redux";
 import appTheme from "../../constants/theme";
 import ViewAtom from "../Atoms/ViewAtom";
+import { CheckBox, Divider, Icon } from 'react-native-elements';
+import TextAtom from "../Atoms/TextAtom";
+
 const {COLORS, SIZES, FONTS}=appTheme
 export default function BottomTabs({navigation}) {
 
@@ -14,45 +17,36 @@ export default function BottomTabs({navigation}) {
       style={{
         flexDirection: "row",
         margin: 10,
-        marginHorizontal: 30,
+        marginHorizontal: 15,
         justifyContent: "space-between",
-      
+      alignItems:"center"
 
       }}
     >
-      <Icon icon="home" text="Home" screen="Home" navigation={navigation} badge={<></>}  size={20}/>
-      <Icon icon="bookmark" text="Cart"  screen="Appointments" navigation={navigation} badge={{}}  size={20}v />
-      <Icon icon="plus" text="plu"  screen="BookingOne" navigation={navigation} badge={{}}  size={30} />
-      <Icon icon="message-square" text="Orders" screen="Consultation" navigation={navigation} badge={<></>}  size={20}/>
-      <Icon icon="user" text="Account" screen="AccountScreen"  navigation={navigation} badge={<></>}   size={20}/>
+      <Icons icon="home-outline" text="Home" screen="Home" navigation={navigation} badge={<></>}  size={20}/>
+      <Icons icon="trail-sign-outline" text="Trail"  screen="Appointments" navigation={navigation} badge={{}}  size={20}v />
+      <Icons icon="calendar-outline" text=""  screen="BookingOne" navigation={navigation} badge={{}}  size={30} />
+      <Icons icon="school-outline" text="Program" screen="Consultation" navigation={navigation} badge={<></>}  size={20}/>
+      <Icons icon="person-outline" text="Me" screen="AccountScreen"  navigation={navigation} badge={<></>}   size={20}/>
     </View>
   );
 }
 
-const Icon = ({ icon, text,screen,navigation,badge,size }) => (
+const Icons = ({ icon, text,screen,navigation,badge,size }) => (
   <TouchableOpacity  onPress={() => {navigation.navigate(screen) }} >
 
  { size>20? 
-   <ViewAtom  jc="flex-start" ai="flex-start"  pv={12} ph={15} bg={COLORS.primary} br={50} mv={0} mh={0} >
-   <Feather 
-    name={icon}
-      size={size}
-      style={{
-        marginBottom: 3,
-        alignSelf: "center",
-      }}   color={COLORS.white}/>
-   </ViewAtom>:
+   <ViewAtom  jc="space-between" ai="flex-start"  pv={12} ph={15} bg={COLORS.green} br={50} mv={0} mh={0} >
+    <Icon name={icon} type="ionicon" color={COLORS.white}  size={size} />
 
-    <Feather
-      name={icon}
-      size={size}
-      style={{
-        marginTop: 20,
-        alignSelf: "center",
-      }}
-      />}
+   </ViewAtom>:
+        <Icon name={icon} type="ionicon" color={COLORS.white}  size={size} />
+
+
+      }
     
-    
+    <TextAtom text={text} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.white} />
+
   </TouchableOpacity>
 );
 const styles =StyleSheet.create({
