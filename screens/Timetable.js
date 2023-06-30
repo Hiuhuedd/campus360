@@ -46,9 +46,9 @@ const width = Dimensions.get('window').width;
     closeSheet()
   }, 1000);
    }
- const handleTap = (slot) => {
+ const handleTap = (slot,day) => {
    if(slot.unitCode&&slot.unitName&&slot.professor){
-navigation.navigate("UnitDetails",{slot:slot})
+navigation.navigate("UnitDetails",{slot:slot,day:day})
     }else{
      setTappedSlot({...slot,day:updatedTimetable.indexOf(dayObj)})
      openSheet()
@@ -71,7 +71,7 @@ navigation.navigate("UnitDetails",{slot:slot})
 
      <ScrollView style={{height:height-130}}  >
       {dayObj.slots.map((slot) => (
-<TouchableOpacity onPress={()=>{handleTap(slot)}} >
+<TouchableOpacity onPress={()=>{handleTap(slot,dayObj)}} >
 
         <React.Fragment key={slot.index}>
           <ViewAtom fd="row" jc="flex-start" ai="center" w="90%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
