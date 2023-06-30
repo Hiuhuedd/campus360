@@ -10,18 +10,16 @@ import { RadioButton } from 'react-native-paper';
 import CardAtom from '../Atoms/CardAtom';
 import PopUp from './PopUp';
 import { ProgramsArray } from '../../constants/content/programs';
-import { updateTimetableSlot } from '../../utils/timetable';
-import { useDispatch } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const {COLORS, SIZES, FONTS}=appTheme
-const AddClass= React.forwardRef(({slot,handleAddClass}, ref) => {
+const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, ref) => {
   function findUnitByCode(unitCode) {
     for (const program of ProgramsArray) {
       const programUnits = program.ProgramUnits;
       
       for (const year in programUnits) {
         const semesters = programUnits[year];
-        console.log(semesters);
+
         
         for (const semester in semesters) {
           const units = semesters[semester];
@@ -68,11 +66,10 @@ const AddClass= React.forwardRef(({slot,handleAddClass}, ref) => {
       findUnitByCode(UnitCode.toUpperCase())
      }
 }, [UnitCode])
-const dispatch = useDispatch();
 
   const handleUpdate=  async()=>{
     setLoading(true)
-   const timetableUpdate=  await updateTimetableSlot(slot.day,slot.index, {
+    const slotObj={
       unitCode:UnitCode,
       unitName:ClassName,
       start:slot.start,
@@ -80,21 +77,17 @@ const dispatch = useDispatch();
       professor: professor,
       index:slot.index,
       location:location
-    })
-    if(timetableUpdate){
-        console.log("here");
-      dispatch({
-        type: "MY_TIMETABLE",
-        payload:timetableUpdate
-      });
-      AsyncStorage.setItem('myTimetable', JSON.stringify(timetableUpdate)).then(res=>{
-        console.log("set");
-        setTimeout(() => {
-            setLoading(false)
-            handleAddClass()
-        }, 3000);
-      })
     }
+    const slotDay=slot.day
+    const slotHr=slot.index
+  const updated=await handleUpdateTimetable(slotDay,slotHr,slotObj)
+  if (updated) {
+    setTimeout(() => {
+      handleAddClass()
+  setLoading(false)
+    }, 10);
+  }
+   
 
   }
 

@@ -3,6 +3,7 @@ import { COLORS } from '../constants/theme';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
+import { promptFunction } from '../utils/360ai';
 
 
 function IntroScreen({navigation}) {

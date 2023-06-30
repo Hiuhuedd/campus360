@@ -8,6 +8,7 @@ import AuthScreen from "./screens/AuthScreen";
 import PinScreen from "./screens/PinScreen";
 import THook from "./screens/THook";
 import Timetable from "./screens/Timetable";
+import UnitDetails from "./screens/UnitDetails";
 
 
 //Screens
@@ -29,6 +30,7 @@ export default function RootNavigation() {
           <Stack.Screen name="PinScreen" component={PinScreen} /> 
           <Stack.Screen name="THook" component={THook} /> 
           <Stack.Screen name="Timetable" component={Timetable} /> 
+          <Stack.Screen name="UnitDetails" component={UnitDetails} /> 
         </Stack.Navigator>
       
       </NavigationContainer>

@@ -1,4 +1,5 @@
-import React from 'react';        
+import React from 'react';  
+import "react-native-url-polyfill/auto"      
 import RootNavigation from './navigation';
 import { AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 import { COLORS } from './constants/theme';

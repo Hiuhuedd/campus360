@@ -45,7 +45,7 @@ const Icons = ({ icon, text,screen,navigation,badge,size }) => (
 
       }
     
-    <TextAtom text={text} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.white} />
+    <TextAtom text={text} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.gray4} />
 
   </TouchableOpacity>
 );

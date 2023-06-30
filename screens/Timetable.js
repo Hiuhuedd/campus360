@@ -5,13 +5,14 @@ import Carousel from 'react-native-reanimated-carousel';
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import ViewAtom from '../components/Atoms/ViewAtom';
-// import { timetable, updateTimetableSlot } from '../utils/timetable';
+import { timetable, updateTimetableSlot } from '../utils/timetable';
 import CardAtom from '../components/Atoms/CardAtom';
 import { ScrollView } from 'react-native-gesture-handler';
 import AddClass from '../components/Molecules/AddClass';
 import { useDispatch, useSelector } from 'react-redux';
 import BottomTabs from '../components/Molecules/BottomTabs';
 import { getProgramByCode } from '../utils/helper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const width = Dimensions.get('window').width;
@@ -20,7 +21,7 @@ const width = Dimensions.get('window').width;
 
  
   
-  const DayView = React.memo(({ dayObj,updatedTimetable }) => {
+  const DayView = React.memo(({ dayObj,updatedTimetable,handleUpdateTimetable,navigation }) => {
     const user=useSelector(state => state.userReducer.user);
 
   //==============================BOTTOM SHEET============================
@@ -41,11 +42,13 @@ const width = Dimensions.get('window').width;
  const sheetRef = useRef(null);  
  
  const handleAddClass = () => {
-     closeSheet()
+  setTimeout(() => {
+    closeSheet()
+  }, 1000);
    }
  const handleTap = (slot) => {
    if(slot.unitCode&&slot.unitName&&slot.professor){
-      // alert("true")
+navigation.navigate("UnitDetails",{slot:slot})
     }else{
      setTappedSlot({...slot,day:updatedTimetable.indexOf(dayObj)})
      openSheet()
@@ -53,9 +56,6 @@ const width = Dimensions.get('window').width;
     
    }
 
-
-   
-console.log(user);
 
   return (
     <View style={{marginTop:0}}>
@@ -101,18 +101,41 @@ console.log(user);
 </TouchableOpacity>
       ))}
      </ScrollView>
-     <AddClass slot={TappedSlot} handleAddClass={handleAddClass} ref={sheetRef}/>
+     <AddClass slot={TappedSlot} handleAddClass={handleAddClass} ref={sheetRef} handleUpdateTimetable={handleUpdateTimetable} />
 
     </View>
   );
 });
 
 function Timetable({ navigation }) {
-    const timetable=useSelector(state => state.userReducer.timetable);
+  const dispatch = useDispatch();
+
+  const handleUpdateTimetable=  async(sd,si,obj)=>{
+  
+   const timetableUpdate=  await updateTimetableSlot(sd,si,obj)
+   if(timetableUpdate){
+      setupdatedTimetable(timetableUpdate)
+      dispatch({
+        type: "MY_TIMETABLE",
+        payload:timetableUpdate
+      });
+ return AsyncStorage.setItem('myTimetable', JSON.stringify(timetableUpdate)).then(res=>{
+      setTimeout(() => {
+        return true
+      }, 1000);
+      })
+    }
+
+  }
+
+
+
+    // const timetableUpdate=useSelector(state => state.userReducer.timetable);
 
   const ref = useRef(null);
     const [activeIndex,setActiveIndex]=useState(0)
     const [updatedTimetable,setupdatedTimetable]=useState(timetable)
+
 
   useEffect(() => {
     ref.current?.scrollTo({ index: activeIndex });
@@ -135,7 +158,7 @@ function Timetable({ navigation }) {
         onSnapToItem={(index) => {
           setActiveIndex(index);
         }}
-        renderItem={({ item: dayObj }) => <DayView dayObj={dayObj}  updatedTimetable={updatedTimetable} />}
+        renderItem={({ item: dayObj }) => <DayView dayObj={dayObj}  updatedTimetable={updatedTimetable} handleUpdateTimetable={handleUpdateTimetable} navigation={navigation} />}
       />
 <BottomTabs navigation={navigation} />
     </View>

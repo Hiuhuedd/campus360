@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 // Array of days of the week
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -13,11 +15,20 @@ const createEmptySlot = (index) => ({
   professor: null,
   index: index,
 });
-
+export let timetable;
 // Create the timetable array
-export const timetable = daysOfWeek.map((day) => {
-  const daySlots = workingHours.map((hour) => createEmptySlot(hour - 7));
-  return { day, slots: daySlots };
+AsyncStorage.getItem('myTimetable').then(value => {
+  if (value !== null) {
+    // Timetable exists, do something with the value
+    timetable = JSON.parse(value);
+    // ... Your code here ...
+  } else {
+    // Timetable does not exist, create a default timetable
+      timetable = daysOfWeek.map((day) => {
+      const daySlots = workingHours.map((hour) => createEmptySlot(hour - 7));
+      return { day, slots: daySlots };
+    });
+  }
 });
 
 // Update timetable slots with actual classes
@@ -36,5 +47,3 @@ updateTimetableSlot(0, 2, {
   professor: 'Prof. Maraga',
   index: 2,
 });
-
-console.log(timetable);
