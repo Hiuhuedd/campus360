@@ -11,6 +11,9 @@ function IntroScreen({navigation}) {
 
   const [loader, setloader] = useState(false)
   useEffect(() => {
+    setTimeout(() => {
+      setloader(true)
+    }, 2000);
     AsyncStorage.getItem('Student').then(value => {
             if (value !== null) {
               dispatch({
@@ -23,7 +26,7 @@ function IntroScreen({navigation}) {
                     type: "MY_TIMETABLE",
                     payload:JSON.parse(value)
                   });
-                  
+            
                   setTimeout(() =>{
                       navigation.navigate('PinScreen')
                   }, 3000)
@@ -32,7 +35,6 @@ function IntroScreen({navigation}) {
                 })
 
             }else{
-              setloader(true)
               setTimeout(() =>{
                   navigation.navigate('AuthScreen')
               }, 6000)

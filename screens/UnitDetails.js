@@ -74,17 +74,17 @@ const UnitDetails = ({navigation,route}) => {
 
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={15} br={0} mv={0} mh={0}>
 
-<TextAtom text={`About ${slot.unitName}`} c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" />
+<TextAtom text={`About ${slot.unitName}`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <TextAtom text={`${unitObj.about}`} c={COLORS.gray2} f="Poppins" s={SIZES.h5} w="500" />
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={10} br={0} mv={0} mh={0}>
 
-<TextAtom text={`How is ${slot.unitName} relevant`} c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" />
+<TextAtom text={`How is ${slot.unitName} relevant`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <TextAtom text={`${unitObj.why}`} c={COLORS.gray2} f="Poppins" s={SIZES.h5} w="500" />
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start" w={"100%"} bg="transparent" pv={10} br={0} mv={0} mh={0}>
 
-<TextAtom text={`Attendance`}  c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" />
+<TextAtom text={`Attendance`}  c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 <ViewAtom fd="row" jc="space-between" ai="center" w="100%"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 
@@ -105,7 +105,7 @@ const UnitDetails = ({navigation,route}) => {
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start" w={"100%"} bg="transparent" pv={10} br={0} mv={0} mh={0}>
 
-<TextAtom text={`Performance`}  c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" />
+<TextAtom text={`Performance`}  c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 <ViewAtom fd="row" jc="space-between" ai="center" w="100%"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 
@@ -121,9 +121,9 @@ const UnitDetails = ({navigation,route}) => {
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start" w={"100%"} bg="transparent" pv={10} br={0} mv={0} mh={0}>
 
-<TextAtom text={`Peer Aid Community`}  c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" />
+<TextAtom text={`Peer Aid Community`}  c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <ViewAtom fd="column" jc="center" ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
-<Icon name={"add-circle"} type="ionicon" color={COLORS.white} size={SIZES.largeTitle} onPress={() => {}} />
+<Icon name={"add-circle"} type="ionicon" color={COLORS.white} size={SIZES.largeTitle} onPress={() => {navigation.navigate("")}} />
 <TextAtom text={`Peer aid community features require that you update your class performance to get started`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
 <TextAtom text={`Your peers are waiting for you`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
 

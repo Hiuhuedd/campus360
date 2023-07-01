@@ -84,8 +84,8 @@ const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, 
   if (updated) {
     setTimeout(() => {
       handleAddClass()
-  setLoading(false)
-    }, 10);
+      setLoading(false)
+    }, 3000);
   }
    
 

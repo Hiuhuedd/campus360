@@ -21,7 +21,7 @@ const width = Dimensions.get('window').width;
 
  
   
-  const DayView = React.memo(({ dayObj,updatedTimetable,handleUpdateTimetable,navigation }) => {
+  const DayView = React.memo(({ dayObj,updatedTimetable,handleUpdateTimetable,navigation,}) => {
     const user=useSelector(state => state.userReducer.user);
 
   //==============================BOTTOM SHEET============================
@@ -45,7 +45,9 @@ const width = Dimensions.get('window').width;
   setTimeout(() => {
     closeSheet()
   }, 1000);
-   }
+}
+
+
  const handleTap = (slot,day) => {
    if(slot.unitCode&&slot.unitName&&slot.professor){
 navigation.navigate("UnitDetails",{slot:slot,day:day})
@@ -62,7 +64,7 @@ navigation.navigate("UnitDetails",{slot:slot,day:day})
                   <ViewAtom fd="row" jc="space-between" ai="flex-start" w="90%" bg="transparent" pv={0} br={0} mv={0} mh={0}>
       {/* <TextAtom text={user.ProgramId} c={COLORS.gray4} f="Poppins" s={SIZES.h3} w="500" ls={-1} /> */}
       {/* <CardAtom fd="column" jc="center" ai="center"   pv={3} ph={3} bg={COLORS.green} br={50} mv={5} mh={3}   el={3} sh='#525252' ></CardAtom> */}
-      <TextAtom text={getProgramByCode(user.ProgramId).programName} c={COLORS.gray4} f="Poppins" s={SIZES.h5} w="500" ls={-1} />
+      {/* <TextAtom text={getProgramByCode(user.ProgramId).programName} c={COLORS.gray4} f="Poppins" s={SIZES.h5} w="500" ls={-1} /> */}
                   </ViewAtom>
 
 
@@ -89,7 +91,7 @@ navigation.navigate("UnitDetails",{slot:slot,day:day})
             <TextAtom text={slot.unitName?slot.unitName:""} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
 
           </ViewAtom>
-            <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+            <ViewAtom fd="column" jc="center" ai="flex-end"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
 
             <TextAtom text={slot.location?slot.location:""} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
             <TextAtom text={slot.professor?slot.professor:''} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
@@ -109,27 +111,27 @@ navigation.navigate("UnitDetails",{slot:slot,day:day})
 
 function Timetable({ navigation }) {
   const dispatch = useDispatch();
+  // const [Loaded, setLoaded] = React.useState(false);
 
   const handleUpdateTimetable=  async(sd,si,obj)=>{
   
    const timetableUpdate=  await updateTimetableSlot(sd,si,obj)
    if(timetableUpdate){
+     
+     return  AsyncStorage.setItem('myTimetable', JSON.stringify(timetableUpdate)).then(()=>{
       setupdatedTimetable(timetableUpdate)
       dispatch({
         type: "MY_TIMETABLE",
         payload:timetableUpdate
       });
- return AsyncStorage.setItem('myTimetable', JSON.stringify(timetableUpdate)).then(res=>{
-      setTimeout(() => {
         return true
-      }, 1000);
       })
+     
+ 
+    }else{
+      return false
     }
-
-  }
-
-
-
+    }
     // const timetableUpdate=useSelector(state => state.userReducer.timetable);
 
   const ref = useRef(null);
@@ -140,6 +142,9 @@ function Timetable({ navigation }) {
   useEffect(() => {
     ref.current?.scrollTo({ index: activeIndex });
   }, [activeIndex]);
+
+  useEffect(() => {
+  }, [updatedTimetable]);
 
      
   return (
