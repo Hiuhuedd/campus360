@@ -10,6 +10,7 @@ import THook from "./screens/THook";
 import Timetable from "./screens/Timetable";
 import UnitDetails from "./screens/UnitDetails";
 import Home from "./screens/Home";
+import AnimatedHeader from "./screens/AnimatedHeader";
 
 
 //Screens
@@ -33,6 +34,8 @@ export default function RootNavigation() {
           <Stack.Screen name="Timetable" component={Timetable} /> 
           <Stack.Screen name="UnitDetails" component={UnitDetails} /> 
           <Stack.Screen name="Home" component={Home} /> 
+          <Stack.Screen name="AnimatedHeader" component={AnimatedHeader} /> 
+          
         </Stack.Navigator>
       
       </NavigationContainer>

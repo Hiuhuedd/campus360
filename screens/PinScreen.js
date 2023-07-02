@@ -38,6 +38,7 @@ const PinScreen = ({navigation}) => {
     }else if(pin.length===3){
         if (user.pin===pin+ digit) {
           navigation.navigate("THook")
+          // navigation.navigate("AnimatedHeader")
         }else{
             showAlert(ALERT_TYPE.WARNING,"", 'Incorrect pin!');
         }

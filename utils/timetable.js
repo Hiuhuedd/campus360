@@ -39,11 +39,3 @@ export const updateTimetableSlot = async(dayIndex, hourIndex, slotData) => {
 };
 
 // Example usage
-updateTimetableSlot(0, 2, {
-  unitCode: 'ECU100',
-  unitName: 'Mathematics 1',
-  start: '9:00am',
-  end: '10:00am',
-  professor: 'Prof. Maraga',
-  index: 2,
-});

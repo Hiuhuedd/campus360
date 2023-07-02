@@ -21,4 +21,4 @@ return response.data.choices[0].message.content
 
 }
 
-promptFunction("hello my name is edward. whats your name?",{})
+// promptFunction("hello my name is edward. whats your name?",{})

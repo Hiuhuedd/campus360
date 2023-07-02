@@ -13,11 +13,13 @@ function IntroScreen({navigation}) {
   useEffect(() => {
     setTimeout(() => {
       setloader(true)
+      navigation.navigate('PinScreen')
+
     }, 2000);
     AsyncStorage.getItem('Student').then(value => {
             if (value !== null) {
               dispatch({
-                type: "ON_USER",
+                type: "ON_USER",      
                 payload:JSON.parse(value)
               });
               AsyncStorage.getItem('myTimetable').then(value => {

@@ -4,7 +4,7 @@
     "slug": "360",
     "version": "1.0.0",
     "orientation": "portrait",
-     "icon": "./assets/360.png",
+    "icon": "./assets/360.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "",
