@@ -60,13 +60,13 @@ const UnitDetails = ({navigation,route}) => {
 <TextAtom text={slot.unitCode?slot.unitCode.toUpperCase():''} c={COLORS.white} f="Poppins" s={SIZES.largeTitle} w="500" ls={-2}/>
 <TextAtom text={`${day.day}s`} c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" ls={-2} />
 
-<TextAtom text={slot.unitName?slot.unitName:""} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
+<TextAtom text={slot.start?slot.start:""} c={COLORS.gray2} f="Roboto" s={SIZES.h4} w="500" />
 
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
 
 <TextAtom text={slot.professor?slot.professor:''} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
-<TextAtom text={slot.location?slot.location:""} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
+<TextAtom text={slot.unitName?slot.unitName:""} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
 </ViewAtom>
 </ViewAtom>
 <CardAtom fd="column" jc="center" ai="center"   pv={.3} ph="48%" bg={COLORS.green} br={3} mv={1} mh={1}   el={3} sh='#525252' >
@@ -74,12 +74,12 @@ const UnitDetails = ({navigation,route}) => {
 
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={15} br={0} mv={0} mh={0}>
 
-<TextAtom text={`About ${slot.unitName}`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
+<TextAtom text={`About`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <TextAtom text={`${unitObj.about}`} c={COLORS.gray2} f="Poppins" s={SIZES.h5} w="500" />
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={10} br={0} mv={0} mh={0}>
 
-<TextAtom text={`How is ${slot.unitName} relevant`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
+<TextAtom text={`Relevance`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <TextAtom text={`${unitObj.why}`} c={COLORS.gray2} f="Poppins" s={SIZES.h5} w="500" />
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start" w={"100%"} bg="transparent" pv={10} br={0} mv={0} mh={0}>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor:COLORS.dark,
     height:SIZES.height,
     paddingTop:30,
-    padding:20
+    padding:15
     // alignItems:"center"
   },
  

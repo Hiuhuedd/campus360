@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import {
-  SafeAreaView,
   View,
   TextInput,
   Image,
   StyleSheet,
   ScrollView,
+  SafeAreaView,
   Animated,
 } from 'react-native';
 import { getFeatureViewAnimation } from '../utils';

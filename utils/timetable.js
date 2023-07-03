@@ -10,12 +10,12 @@ const workingHours = Array.from({ length: 13 }, (_, index) => index + 7);
 const createEmptySlot = (index) => ({
   unitCode: null,
   unitName: null,
-  start: `${index + 7}:00am`,
-  end: `${index + 8}:00am`,
+  start: index+6 < 12 ? `${index+6}:00 AM` : `${(index +6)-12}:00 PM`,
+  end: (index + 7) < 12 ? `${index + 7}:00 AM` : `${(index + 7)-12}:00 PM`,
   professor: null,
   index: index,
 });
-export let timetable;
+export let timetable 
 // Create the timetable array
 AsyncStorage.getItem('myTimetable').then(value => {
   if (value !== null) {

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { promptFunction } from '../utils/360ai';
+import { getTimeSpans } from '../utils/timeFunction';
 
 
 function IntroScreen({navigation}) {
@@ -11,11 +12,10 @@ function IntroScreen({navigation}) {
 
   const [loader, setloader] = useState(false)
   useEffect(() => {
+    getTimeSpans();
     setTimeout(() => {
       setloader(true)
-      navigation.navigate('PinScreen')
-
-    }, 2000);
+     }, 2000);
     AsyncStorage.getItem('Student').then(value => {
             if (value !== null) {
               dispatch({
@@ -23,18 +23,18 @@ function IntroScreen({navigation}) {
                 payload:JSON.parse(value)
               });
               AsyncStorage.getItem('myTimetable').then(value => {
+
                 if (value !== null) {
                   dispatch({
                     type: "MY_TIMETABLE",
                     payload:JSON.parse(value)
                   });
             
-                  setTimeout(() =>{
-                      navigation.navigate('PinScreen')
-                  }, 3000)
-                  
                 }
-                })
+                setTimeout(() =>{
+                    navigation.navigate('PinScreen')
+                }, 3000)    
+              })
 
             }else{
               setTimeout(() =>{

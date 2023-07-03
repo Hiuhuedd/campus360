@@ -11,6 +11,9 @@ import Timetable from "./screens/Timetable";
 import UnitDetails from "./screens/UnitDetails";
 import Home from "./screens/Home";
 import AnimatedHeader from "./screens/AnimatedHeader";
+import Program from "./screens/Program";
+import Trail from "./screens/Trail";
+import Me from "./screens/Me";
 
 
 //Screens
@@ -34,7 +37,9 @@ export default function RootNavigation() {
           <Stack.Screen name="Timetable" component={Timetable} /> 
           <Stack.Screen name="UnitDetails" component={UnitDetails} /> 
           <Stack.Screen name="Home" component={Home} /> 
-          <Stack.Screen name="AnimatedHeader" component={AnimatedHeader} /> 
+          <Stack.Screen name="Program" component={Program} /> 
+          <Stack.Screen name="Me" component={Me} /> 
+          <Stack.Screen name="Trail" component={Trail} /> 
           
         </Stack.Navigator>
       

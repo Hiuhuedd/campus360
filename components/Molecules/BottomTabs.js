@@ -25,10 +25,10 @@ backgroundColor:COLORS.dark
       }}
     >
       <Icons theme={theme} icon="home-outline" text="Home" screen="Home" navigation={navigation} badge={<></>}  size={20}/>
-      <Icons theme={theme}icon="trail-sign-outline" text="Trail"  screen="Appointments" navigation={navigation} badge={{}}  size={20}v />
+      <Icons theme={theme}icon="trail-sign-outline" text="Trail"  screen="Trail" navigation={navigation} badge={{}}  size={20}v />
       <Icons theme={theme}icon="calendar-outline" text=""  screen="Timetable" navigation={navigation} badge={{}}  size={30} />
-      <Icons theme={theme} icon="school-outline" text="Program" screen="Consultation" navigation={navigation} badge={<></>}  size={20}/>
-      <Icons theme={theme}icon="person-outline" text="Me" screen="AccountScreen"  navigation={navigation} badge={<></>}   size={20}/>
+      <Icons theme={theme} icon="school-outline" text="Program" screen="Program" navigation={navigation} badge={<></>}  size={20}/>
+      <Icons theme={theme}icon="person-outline" text="Me" screen="Me"  navigation={navigation} badge={<></>}   size={20}/>
     </View>
   );
 }

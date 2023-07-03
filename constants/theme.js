@@ -6,6 +6,7 @@ export const COLORS =
   { primary: '#3b82f6', //blue
     rose: '#be123c', //rose
     green: '#15803d', 
+    green2: '#65a30d', 
     gray: '#EEF1F3',
     gray3: '#f4f4f5', 
     gray4: '#e5e5e5',
@@ -14,8 +15,11 @@ export const COLORS =
     gold: '#eab308',
     black: '#171717',
     dark: "#111",
+    dark2: "#000",
     fillColor:"#00000a10", 
-    amber:"#d97706"
+    amber:"#d97706",
+    chocolate:"#78350f",
+    pink:"#be185d"
 
 };
 export const WEIGHT = {

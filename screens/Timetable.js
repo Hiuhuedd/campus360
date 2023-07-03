@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BottomTabs from '../components/Molecules/BottomTabs';
 import { getProgramByCode } from '../utils/helper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LinearAtom from '../components/Atoms/LinearAtom';
 
 
 const width = Dimensions.get('window').width;
@@ -60,23 +61,21 @@ navigation.navigate("UnitDetails",{slot:slot,day:day})
 
 
   return (
-    <View style={{marginTop:0}}>
-                  <ViewAtom fd="row" jc="space-between" ai="flex-start" w="90%" bg="transparent" pv={0} br={0} mv={0} mh={0}>
-      {/* <TextAtom text={user.ProgramId} c={COLORS.gray4} f="Poppins" s={SIZES.h3} w="500" ls={-1} /> */}
-      {/* <CardAtom fd="column" jc="center" ai="center"   pv={3} ph={3} bg={COLORS.green} br={50} mv={5} mh={3}   el={3} sh='#525252' ></CardAtom> */}
-      {/* <TextAtom text={getProgramByCode(user.ProgramId).programName} c={COLORS.gray4} f="Poppins" s={SIZES.h5} w="500" ls={-1} /> */}
-                  </ViewAtom>
+    <View style={{marginTop:0,}}>
+    
+                  {/* <ViewAtom fd="row" jc="space-between" ai="flex-start" w="100%" bg="transparent" pv={0} br={0} mv={0} mh={0}>
+          </ViewAtom> */}
 
 
      <TextAtom text={`${dayObj.day}s`} c={COLORS.white} f="Poppins" s={SIZES.h1} w="500" ls={-2} />
      <TextAtom text={'Tap on empty slots to add classes.'} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" ls={0} />
 
-     <ScrollView style={{height:height-130}}  >
+     <ScrollView style={{height:height-130}} showsVerticalScrollIndicator={false}  >
       {dayObj.slots.map((slot) => (
 <TouchableOpacity onPress={()=>{handleTap(slot,dayObj)}} >
 
         <React.Fragment key={slot.index}>
-          <ViewAtom fd="row" jc="flex-start" ai="center" w="90%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
+          <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
           <ViewAtom  fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
             <TextAtom text={`${slot.start}  `} c={COLORS.white} f="Roboto" s={SIZES.base} w="500" />
             <CardAtom fd="column" jc="center" ai="center" w={1}  pv={30} ph={0} bg={COLORS.green} br={3} mv={1} mh={1}   el={3} sh='#525252' >
@@ -146,17 +145,19 @@ function Timetable({ navigation }) {
   useEffect(() => {
   }, [updatedTimetable]);
 
-     
+  const bgs=[COLORS.primary,COLORS.amber,COLORS.green,COLORS.gold,COLORS.gray2,COLORS.rose,COLORS.fuschia,COLORS.blue,COLORS.green2,COLORS.chocolate,COLORS.pink]
+  const [BgIndex,setBgIndex]=useState(0)
+  const theme=bgs[BgIndex]
   return (
-    <View style={{backgroundColor:COLORS.black,flex:1, paddingTop: 35, padding: 15,height,}}>
-         
+    <View style={{backgroundColor:COLORS.dark2,flex:1, paddingTop: 0, padding: 0,height,}}>
+           <LinearAtom  ai="center"  pv={35}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
 
 
       <Carousel
         ref={ref}
         loop={true}
-        width={width}
-        height={height-80}
+        width={width-10}
+        height={height}
         autoPlay={false}
         data={updatedTimetable}
         scrollAnimationDuration={1000}
@@ -165,6 +166,8 @@ function Timetable({ navigation }) {
         }}
         renderItem={({ item: dayObj }) => <DayView dayObj={dayObj}  updatedTimetable={updatedTimetable} handleUpdateTimetable={handleUpdateTimetable} navigation={navigation} />}
       />
+           </LinearAtom>
+
 <BottomTabs navigation={navigation} />
     </View>
   );

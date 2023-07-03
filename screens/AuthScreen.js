@@ -15,7 +15,7 @@ import CardAtom from '../components/Atoms/CardAtom';
 import { useDispatch } from 'react-redux';
 import InputCarousel from '../components/Molecules/InputCarousel';
 
-const AuthScreen = () => {
+const AuthScreen = ({navigation}) => {
    
   const [Loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -52,8 +52,8 @@ const AuthScreen = () => {
         payload:u
       });
      AsyncStorage.setItem('Student', JSON.stringify(u)).then(res=>{
-      //  navigation.navigate('PinScreen')
-      alert("done")
+       navigation.navigate('PinScreen')
+      // alert("done")
        setLoading(false)
 
      })
