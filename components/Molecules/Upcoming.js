@@ -9,8 +9,7 @@ import { COLORS, SIZES } from '../../constants/theme';
 export default Upcoming = ({ UpcomingArr}) => {
   
   alert(UpcomingArr.length);
-    return (
-      <View>
+
 
   { UpcomingArr.map((event)=>{
     if (UpcomingArr.length===0 ) {
@@ -50,7 +49,6 @@ export default Upcoming = ({ UpcomingArr}) => {
 
     } 
   })   }
-      </View>
-    );
+    
   };
   
