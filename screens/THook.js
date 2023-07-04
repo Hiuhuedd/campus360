@@ -24,7 +24,7 @@ const THook = ({navigation}) => {
      
 </ViewAtom>
   <TextAtom text={"Smart Timetable"} f="Poppins"s={SIZES.h1} w={"500"} ta="center" ls={-2}c={COLORS.white} />
-  <TextAtom text={"Lets you keep track of your classes, acdemics, attendance and much more.."} f="Poppins"s={SIZES.h5} w={"500"} ta="center" ls={0}c={COLORS.gray2} />
+  <TextAtom text={"Lets you keep track of your classes, academics, attendance and much more.."} f="Poppins"s={SIZES.h5} w={"500"} ta="center" ls={0}c={COLORS.gray2} />
   {checking?             
   <ViewAtom  fd="column" jc="center" ai="center" w="100%" bg="transparent" pv={50} br={0} mv={5} mh={0}>
      

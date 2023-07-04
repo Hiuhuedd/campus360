@@ -150,7 +150,7 @@ function Timetable({ navigation }) {
   const theme=bgs[BgIndex]
   return (
     <View style={{backgroundColor:COLORS.dark2,flex:1, paddingTop: 0, padding: 0,height,}}>
-           <LinearAtom  ai="center"  pv={35}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
+           <LinearAtom  ai="center"  pv={35}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.chocolate,COLORS.dark]} >
 
 
       <Carousel

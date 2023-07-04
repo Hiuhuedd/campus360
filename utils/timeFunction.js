@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function getTimeSpans() {
     const today = new Date();
     const tomorrow = new Date();
@@ -63,7 +65,7 @@ export function getTimeSpans() {
   
     return timeSpans;
   }
-  
+  export const currentTime = moment().format('h:mm A');
   // Example usage:
   const timeSpans = getTimeSpans();
   console.log(timeSpans);

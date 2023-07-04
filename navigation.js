@@ -10,10 +10,10 @@ import THook from "./screens/THook";
 import Timetable from "./screens/Timetable";
 import UnitDetails from "./screens/UnitDetails";
 import Home from "./screens/Home";
-import AnimatedHeader from "./screens/AnimatedHeader";
 import Program from "./screens/Program";
-import Trail from "./screens/Trail";
+import Trail from "./screens/Chat";
 import Me from "./screens/Me";
+import Chat from "./screens/Chat";
 
 
 //Screens
@@ -39,7 +39,7 @@ export default function RootNavigation() {
           <Stack.Screen name="Home" component={Home} /> 
           <Stack.Screen name="Program" component={Program} /> 
           <Stack.Screen name="Me" component={Me} /> 
-          <Stack.Screen name="Trail" component={Trail} /> 
+          <Stack.Screen name="Chat" component={Chat} /> 
           
         </Stack.Navigator>
       

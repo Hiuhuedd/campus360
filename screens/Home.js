@@ -7,12 +7,7 @@ import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
 import ViewAtom from '../components/Atoms/ViewAtom';
 import { useSelector } from 'react-redux';
-import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
-import { Button } from '../components/Atoms/Button';
-import { ActivityIndicator } from 'react-native-paper';
-import CardAtom from '../components/Atoms/CardAtom';
 import BottomTabs from '../components/Molecules/BottomTabs';
-import Progress from '../components/Molecules/Progress';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import Upcoming from '../components/Molecules/Upcoming';
 import Networks from '../components/Molecules/Networks';
@@ -21,6 +16,9 @@ import { getFeatureViewAnimation } from '../utils';
 import { getTimeSpans } from '../utils/timeFunction';
 import { timetable } from '../utils/timetable';
 import moment from 'moment';
+import { ProgressBar, MD3Colors } from 'react-native-paper';
+import ProgressMic from '../components/Molecules/ProgressMic';
+import CardAtom from '../components/Atoms/CardAtom';
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 const AnimatedCard = Animated.createAnimatedComponent(View);
 const AnimatedHeader = Animated.createAnimatedComponent(SafeAreaView);
@@ -134,7 +132,7 @@ const Home = ({navigation}) => {
         translateX: animatedValue.interpolate({
           inputRange: [0, 25],
 
-          outputRange: [0, -10],
+          outputRange: [-30, -35],
           extrapolate: 'clamp',
         }),
       },
@@ -165,7 +163,7 @@ const Home = ({navigation}) => {
       {
         translateX: animatedValue.interpolate({
           inputRange: [0, 25],
-          outputRange: [0, -110],
+          outputRange: [0, -140],
           extrapolate: 'clamp',
         }),
       },
@@ -201,6 +199,12 @@ const date2 = new Date(convertedDate);
     setchecking(false)
   }, 5000);
   }, []);
+
+
+  const params=63
+  const defaultParams=180
+  const tokens=36
+  const defaultTokens=50
   return (
     <View style={styles.container}>
 <LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme,COLORS.dark]} >
@@ -219,7 +223,7 @@ const date2 = new Date(convertedDate);
                      elevation:3,
                     shadowColor:'#525252'
                     },featureNameAnimation]}>
-                <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
+                <ViewAtom fd="column" jc="flex-start" ai="flex-start"  w={"45%"} pv={0} br={0} mv={0} mh={0}>
                 <AnimatedTO style={[{display:"flex",flexDirection:"row"},aiAnimation]} onPress={()=>{setBgIndex( Math.floor(Math.random() * 9))}}>
                 <AnimatedImage source={require('../assets/360ai.png')} style={[styles.Icon]} />
                 <TextAtom text={`   aska v1.0.12`} c={theme} f="Poppins" s={SIZES.base} w="500" />
@@ -230,20 +234,31 @@ const date2 = new Date(convertedDate);
 
             <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" ph={0} br={0} mv={5} mh={0}>
 
-            <ViewAtom fd="row" jc="space-between" ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
-
-            <TextAtom text={`Usage`} c={theme} f="Poppins" s={SIZES.h5} w="500" />
-            <TextAtom text={`   0 conversations`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
+            <ViewAtom fd="column" jc="space-between" ai="flex-start"   bg="transparent" pv={0} br={0} mv={0} mh={0}>
+            <TextAtom text={`0 conversations`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
             </ViewAtom>
-            <ViewAtom fd="row" jc="space-between" ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
+            <ViewAtom fd="column" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 
-            <TextAtom text={`Tokens`} c={theme} f="Poppins" s={SIZES.h5} w="500" />
-            <TextAtom text={`  50k / 50k`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
+            <TextAtom text={`Tokens`} c={theme} f="Poppins" s={SIZES.base} w="500" />
+
+            <CardAtom fd="row" jc="flex-start" w={"100%"}  ai="center" pv={0} ph={0}  br={5} mv={-3} mh={0} el={30} sh={COLORS.amber}>
+                <CardAtom fd="row" jc="flex-start" w={`${(tokens/defaultTokens)*100}%`}  ai="flex-start" pv={1} ph={0} bg={theme} br={2} mv={0} mh={0} el={30} sh={COLORS.amber}></CardAtom>
+                <TextAtom text={` ${Math.floor((tokens/defaultTokens)*100)}%`} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+
+           </CardAtom>
+
+
+            <TextAtom text={`${tokens}k / ${defaultTokens}k`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
             </ViewAtom>
-            <ViewAtom fd="row" jc="space-between" ai="center" bg="transparent" pv={0} br={0} mv={0} mh={0}>
+            <ViewAtom fd="column" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 
-            <TextAtom text={`Parameters`} c={theme} f="Poppins" s={SIZES.h5} w="500" />
-            <TextAtom text={`  23`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
+            <TextAtom text={`Parameters`} c={theme} f="Poppins" s={SIZES.base} w="500" />
+            <CardAtom fd="row" jc="flex-start" w={"100%"}  ai="center" pv={0} ph={0}  br={5} mv={-3}  mh={0} el={30} sh={COLORS.amber}>
+                <CardAtom fd="row" jc="flex-start" w={`${(params/defaultParams)*100}%`}  ai="flex-start" pv={1} ph={0} bg={theme} br={2} mv={0} mh={0} el={30} sh={COLORS.amber}></CardAtom>
+                <TextAtom text={` ${Math.floor((params/defaultParams)*100)}%`} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+
+           </CardAtom>
+            <TextAtom text={`${params}k / ${defaultParams}k`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
             </ViewAtom>
             </ViewAtom>
           </AnimatedCard>
@@ -253,9 +268,9 @@ const date2 = new Date(convertedDate);
        <TextAtom text={`${getTimeSpans().today.date} `} c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" />
 
              </AnimatedCard>
-            <AnimatedCard style={[{               
+            <AnimatedCard style={[{              
             },aiAnimation2 ]}>
-            <Progress theme={theme}/>
+            <ProgressMic theme={theme}/>
              </AnimatedCard>
             
             </AnimatedCard>

@@ -11,7 +11,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import BottomTabs from '../components/Molecules/BottomTabs';
 
-const Trail = ({navigation}) => {
+const Chat = ({navigation}) => {
     const user=useSelector(state => state.userReducer.user);
    const [checking,setchecking]=useState(true)
    useEffect(() => {
@@ -25,7 +25,7 @@ const Trail = ({navigation}) => {
   <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>
      
 </ViewAtom>
-  <TextAtom text={"Trail"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+  <TextAtom text={"Chat"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
   <TextAtom text={"Lets you keep track of your campus activities and much more.."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
 </LinearAtom>  
             
@@ -71,5 +71,5 @@ const styles = StyleSheet.create({
  
 });
 
-export default Trail;
+export default Chat;
 

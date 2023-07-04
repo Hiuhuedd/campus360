@@ -7,7 +7,7 @@ import { COLORS, SIZES } from '../../constants/theme';
 
 export default UpcomingAvatar = ({ event }) => {
     
-  
+  console.log(event);
     return (
         <>
       <ViewAtom fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
