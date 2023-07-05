@@ -11,6 +11,7 @@ import { currentTime } from '../../utils/timeFunction';
 export default Upcoming = ({ UpcomingArr}) => {
   const [items,setitems]=useState(false)
   useEffect(() => {
+    
     if (UpcomingArr.length<1) {
       setitems(true)
     }

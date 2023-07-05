@@ -19,10 +19,11 @@ import LinearAtom from '../components/Atoms/LinearAtom';
 const width = Dimensions.get('window').width;
   const height = Dimensions.get('window').height;
   
-
- 
+  
+  
   
   const DayView = React.memo(({ dayObj,updatedTimetable,handleUpdateTimetable,navigation,}) => {
+    const theme=useSelector(state => state.userReducer.theme);
     const user=useSelector(state => state.userReducer.user);
 
   //==============================BOTTOM SHEET============================
@@ -78,7 +79,7 @@ navigation.navigate("UnitDetails",{slot:slot,day:day})
           <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
           <ViewAtom  fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
             <TextAtom text={`${slot.start}  `} c={COLORS.white} f="Roboto" s={SIZES.base} w="500" />
-            <CardAtom fd="column" jc="center" ai="center" w={1}  pv={30} ph={0} bg={COLORS.green} br={3} mv={1} mh={1}   el={3} sh='#525252' >
+            <CardAtom fd="column" jc="center" ai="center" w={1}  pv={30} ph={0} bg={theme.name==="Dark"?COLORS.white:theme.color} br={3} mv={1} mh={1}   el={3} sh='#525252' >
           </CardAtom>
             <TextAtom text={`${slot.end}  `} c={COLORS.white} f="Roboto" s={SIZES.base} w="500" />
             
@@ -111,7 +112,6 @@ navigation.navigate("UnitDetails",{slot:slot,day:day})
 function Timetable({ navigation }) {
   const dispatch = useDispatch();
   // const [Loaded, setLoaded] = React.useState(false);
-
   const handleUpdateTimetable=  async(sd,si,obj)=>{
   
    const timetableUpdate=  await updateTimetableSlot(sd,si,obj)
@@ -145,12 +145,10 @@ function Timetable({ navigation }) {
   useEffect(() => {
   }, [updatedTimetable]);
 
-  const bgs=[COLORS.primary,COLORS.amber,COLORS.green,COLORS.gold,COLORS.gray2,COLORS.rose,COLORS.fuschia,COLORS.blue,COLORS.green2,COLORS.chocolate,COLORS.pink]
-  const [BgIndex,setBgIndex]=useState(0)
-  const theme=bgs[BgIndex]
+ 
   return (
     <View style={{backgroundColor:COLORS.dark2,flex:1, paddingTop: 0, padding: 0,height,}}>
-           <LinearAtom  ai="center"  pv={35}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.chocolate,COLORS.dark]} >
+           <LinearAtom  ai="center"  pv={35}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.dark,COLORS.dark]} >
 
 
       <Carousel

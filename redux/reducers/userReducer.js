@@ -1,9 +1,11 @@
+import { COLORS } from "../../constants/theme";
 import { timetable } from "../../utils/timetable";
 
 let defaultState = {
     timetable: timetable,
     user: {},
     location: {},
+    theme:{color:COLORS.dark,name:"Dark"},
   };
 
 
@@ -29,6 +31,11 @@ const UserReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 timetable: payload    
+            }
+        case 'MY_THEME':
+            return {
+                ...state,
+                theme: payload    
             }
               
 

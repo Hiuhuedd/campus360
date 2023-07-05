@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "hiuhu.netlify.app"
     },
     "web": {
       "favicon": "./assets/360.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "aef2ee3f-7918-4696-8721-e1eacfe79d06"
+      }
     }
   }
 }

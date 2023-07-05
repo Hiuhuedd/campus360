@@ -19,6 +19,7 @@ export const COLORS =
     fillColor:"#00000a10", 
     amber:"#d97706",
     chocolate:"#78350f",
+    fuschia:"#c026d3",
     pink:"#be185d"
 
 };

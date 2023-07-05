@@ -53,7 +53,6 @@ const AuthScreen = ({navigation}) => {
       });
      AsyncStorage.setItem('Student', JSON.stringify(u)).then(res=>{
        navigation.navigate('PinScreen')
-      // alert("done")
        setLoading(false)
 
      })

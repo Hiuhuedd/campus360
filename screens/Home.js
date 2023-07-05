@@ -1,7 +1,5 @@
 import React, { useState,useEffect,useRef } from 'react';
-
 import { View, TouchableOpacity, Text, StyleSheet,Image , ScrollView,  SafeAreaView,  Animated,  TextInput,} from 'react-native';
-
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
@@ -11,17 +9,14 @@ import BottomTabs from '../components/Molecules/BottomTabs';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import Upcoming from '../components/Molecules/Upcoming';
 import Networks from '../components/Molecules/Networks';
-
-import { getFeatureViewAnimation } from '../utils';
 import { getTimeSpans } from '../utils/timeFunction';
 import { timetable } from '../utils/timetable';
 import moment from 'moment';
-import { ProgressBar, MD3Colors } from 'react-native-paper';
 import ProgressMic from '../components/Molecules/ProgressMic';
 import CardAtom from '../components/Atoms/CardAtom';
-const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
+
+
 const AnimatedCard = Animated.createAnimatedComponent(View);
-const AnimatedHeader = Animated.createAnimatedComponent(SafeAreaView);
 const AnimatedImage = Animated.createAnimatedComponent(Image);
 const AnimatedTO = Animated.createAnimatedComponent(TouchableOpacity );
 
@@ -30,19 +25,14 @@ const UPPER_HEADER_PADDING_TOP = 4;
 const LOWER_HEADER_HEIGHT = 130;
 const Home = ({navigation}) => {
   const user=useSelector(state => state.userReducer.user);
-  const bgs=[COLORS.primary,COLORS.amber,COLORS.green,COLORS.gold,COLORS.gray2,COLORS.rose,COLORS.fuschia,COLORS.blue,COLORS.green2,COLORS.chocolate,COLORS.pink]
-  const [BgIndex,setBgIndex]=useState(9)
-  const theme=bgs[BgIndex]
+ 
+  const theme=useSelector(state => state.userReducer.theme);
+  console.log(theme);
   //==============SCROLL ANIMATION===========
   const animatedValue = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef(null);
   const lastOffsetY = useRef(0);
   const scrollDirection = useRef('');
-
-  const depositViewAnimation = getFeatureViewAnimation(animatedValue, 36);
-  const withdrawViewAnimation = getFeatureViewAnimation(animatedValue, -60);
-  const qrViewAnimation = getFeatureViewAnimation(animatedValue, -56);
-  const scanViewAnimation = getFeatureViewAnimation(animatedValue, -92);
 
   const cardContainerAnimation = {
    marginTop: animatedValue.interpolate({
@@ -112,7 +102,7 @@ const Home = ({navigation}) => {
       {
         translateX: animatedValue.interpolate({
           inputRange: [0, 25],
-          outputRange: [0, 180],
+          outputRange: [0, 160],
           extrapolate: 'clamp',
         }),
       },
@@ -131,8 +121,7 @@ const Home = ({navigation}) => {
       {
         translateX: animatedValue.interpolate({
           inputRange: [0, 25],
-
-          outputRange: [-30, -35],
+          outputRange: [-10, -25],
           extrapolate: 'clamp',
         }),
       },
@@ -156,7 +145,7 @@ const Home = ({navigation}) => {
       {
         translateY: animatedValue.interpolate({
           inputRange: [0, 20],
-          outputRange: [0, 24],
+          outputRange: [0, 34],
           extrapolate: 'clamp',
         }),
       },
@@ -184,7 +173,7 @@ const returnTTDay=(day)=>{
         const convertedDate = moment( slot.start, 'h:mm A').format();
 const date1 = new Date(currentTime);
 const date2 = new Date(convertedDate);
-        return  date1<= date2 ;
+        return  date1<= date2 && slot.unitCode!==null
       });
     setUpcomingArr(filteredSlots)
     }
@@ -207,12 +196,11 @@ const date2 = new Date(convertedDate);
   const defaultTokens=50
   return (
     <View style={styles.container}>
-<LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme,COLORS.dark]} >
+<LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
       
                 <AnimatedCard 
                     style={[{
-                      position:"absolute", 
-                                          
+                    position:"absolute",                
                     display:"flex",
                     flexDirection:"row",
                     justifyContent: "space-between",
@@ -224,7 +212,7 @@ const date2 = new Date(convertedDate);
                     shadowColor:'#525252'
                     },featureNameAnimation]}>
                 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  w={"45%"} pv={0} br={0} mv={0} mh={0}>
-                <AnimatedTO style={[{display:"flex",flexDirection:"row"},aiAnimation]} onPress={()=>{setBgIndex( Math.floor(Math.random() * 9))}}>
+                <AnimatedTO style={[{display:"flex",flexDirection:"row"},aiAnimation]} onPress={()=>{}}>
                 <AnimatedImage source={require('../assets/360ai.png')} style={[styles.Icon]} />
                 <TextAtom text={`   aska v1.0.12`} c={theme} f="Poppins" s={SIZES.base} w="500" />
 
@@ -239,11 +227,11 @@ const date2 = new Date(convertedDate);
             </ViewAtom>
             <ViewAtom fd="column" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 
-            <TextAtom text={`Tokens`} c={theme} f="Poppins" s={SIZES.base} w="500" />
+            <TextAtom text={`Tokens`} c={theme.name==="Dark"?COLORS.white:theme.color} f="Poppins" s={SIZES.base} w="500" />
 
-            <CardAtom fd="row" jc="flex-start" w={"100%"}  ai="center" pv={0} ph={0}  br={5} mv={-3} mh={0} el={30} sh={COLORS.amber}>
-                <CardAtom fd="row" jc="flex-start" w={`${(tokens/defaultTokens)*100}%`}  ai="flex-start" pv={1} ph={0} bg={theme} br={2} mv={0} mh={0} el={30} sh={COLORS.amber}></CardAtom>
-                <TextAtom text={` ${Math.floor((tokens/defaultTokens)*100)}%`} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+            <CardAtom fd="row" jc="flex-start" w={"100%"}  ai="center" pv={0} ph={0}  br={5} mv={-3} mh={0} el={30} sh={COLORS.black}>
+                <CardAtom fd="row" jc="flex-start" w={`${(tokens/defaultTokens)*100}%`}  ai="flex-start" pv={1} ph={0} bg={theme.name==="Dark"?COLORS.white:theme.color} br={2} mv={0} mh={0} el={30} sh={COLORS.black}></CardAtom>
+                <TextAtom text={` ${Math.floor((tokens/defaultTokens)*100)}%`} c={theme.name==="Dark"?COLORS.white:theme.color} f="Poppins" s={SIZES.base} w="500" />
 
            </CardAtom>
 
@@ -252,10 +240,10 @@ const date2 = new Date(convertedDate);
             </ViewAtom>
             <ViewAtom fd="column" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 
-            <TextAtom text={`Parameters`} c={theme} f="Poppins" s={SIZES.base} w="500" />
-            <CardAtom fd="row" jc="flex-start" w={"100%"}  ai="center" pv={0} ph={0}  br={5} mv={-3}  mh={0} el={30} sh={COLORS.amber}>
-                <CardAtom fd="row" jc="flex-start" w={`${(params/defaultParams)*100}%`}  ai="flex-start" pv={1} ph={0} bg={theme} br={2} mv={0} mh={0} el={30} sh={COLORS.amber}></CardAtom>
-                <TextAtom text={` ${Math.floor((params/defaultParams)*100)}%`} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+            <TextAtom text={`Parameters`} c={theme.name==="Dark"?COLORS.white:theme.color} f="Poppins" s={SIZES.base} w="500" />
+            <CardAtom fd="row" jc="flex-start" w={"100%"}  ai="center" pv={0} ph={0}  br={5} mv={-3}  mh={0} el={30} sh={COLORS.black}>
+                <CardAtom fd="row" jc="flex-start" w={`${(params/defaultParams)*100}%`}  ai="flex-start" pv={1} ph={0} bg={theme.name==="Dark"?COLORS.white:theme.color} br={2} mv={0} mh={0} el={30} sh={COLORS.black}></CardAtom>
+                <TextAtom text={` ${Math.floor((params/defaultParams)*100)}%`} c={theme.name==="Dark"?COLORS.white:theme.color} f="Poppins" s={SIZES.base} w="500" />
 
            </CardAtom>
             <TextAtom text={`${params}k / ${defaultParams}k`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
@@ -265,7 +253,7 @@ const date2 = new Date(convertedDate);
             </ViewAtom>  
             <AnimatedCard style={[{               
             },aiAnimation3 ]}>
-       <TextAtom text={`${getTimeSpans().today.date} `} c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" />
+       <TextAtom text={`${getTimeSpans().today.date} `} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 
              </AnimatedCard>
             <AnimatedCard style={[{              

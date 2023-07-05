@@ -18,9 +18,12 @@ const ProgressMic = ({ theme }) => {
   const [rateIndex, setRateIndex] = useState(0);
   const [volumeIndex, setVolumeIndex] = useState(0);
 
-  const pitchValues = [1, .5, 1.2];
-  const rateValues = [1, .7, 1.2];
-  const volumeValues = [1, 1.0, 1.2];
+  const pitchValues = [0.92, 0.95, 0.81, 1.17, 1.03, 0.92, 0.98, 1.13, 1.07, 1.14]
+
+  const rateValues = [0.85, 1.1, 0.9, 0.95, 0.97, 0.84, 1.12, 0.89, 1.06, 0.94]
+
+  const volumeValues = [1.11, 0.98, 1.0, 1.09, 1.01, 0.92, 1.05, 0.82, 1.17, 1.07]
+
 
   const listAllVoiceOptions = async () => {
     let voices = await Speech.getAvailableVoicesAsync();
@@ -34,7 +37,7 @@ const ProgressMic = ({ theme }) => {
       language: "en-US",
       pitch: pitchValues[pitchIndex],
       rate: rateValues[rateIndex],
-      volume: volumeValues[volumeIndex],
+      volume: 1,
       quality: "enhanced",
       onStart: () => {
         // Handle speech start event
@@ -59,11 +62,12 @@ const ProgressMic = ({ theme }) => {
     listAllVoiceOptions();
     const interval = setInterval(() => {
       setProgress((prevProgress) => prevProgress + v);
-
+      
       setPitchIndex((pitchIndex + 1) % pitchValues.length);
       setRateIndex((rateIndex + 1) % rateValues.length);
       setVolumeIndex((volumeIndex + 1) % volumeValues.length);
-    }, 100);
+      console.log(pitchValues[pitchIndex],rateValues[rateIndex])
+    }, 10);
 
     return () => {
       clearInterval(interval);
@@ -83,13 +87,13 @@ const ProgressMic = ({ theme }) => {
         width={3}
         fill={progress}
         padding={5}
-        tintColor={theme}
-        backgroundColor={COLORS.black}
+        tintColor={theme.name==="Dark"?COLORS.white:theme.color}
+        backgroundColor={theme.name==="Dark"?COLORS.white:theme.color}
       >
         {(fill) => (
           <>
             <TouchableOpacity onPress={handleOnboarding}>
-              <ViewAtom jc="center" ai="center" bg={theme} pv={2} ph={2} br={50} mv={0} mh={0}>
+              <ViewAtom jc="center" ai="center" bg={theme.name==="Dark"?COLORS.white:theme.color} pv={2} ph={2} br={50} mv={0} mh={0}>
                 <CardAtom fd="row" jc="center" ai="center" pv={8} ph={8} bg={COLORS.dark2} br={50} mv={0} mh={0} el={30} sh={COLORS.amber}>
                   <Icon name="mic" type="ioniconv4" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h3} />
                 </CardAtom>
