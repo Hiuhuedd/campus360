@@ -24,11 +24,11 @@ export default function BottomTabs({navigation}) {
 backgroundColor:COLORS.dark
       }}
     >
-      <Icons themec={theme.color} icon="home-outline" text="Home" screen="Home" navigation={navigation} badge={<></>}  size={20}/>
-      <Icons themec={theme.color}icon="chatbox-ellipses-outline" text="Chat"  screen="Chat" navigation={navigation} badge={{}}  size={20}v />
-      <Icons themec={theme.color}icon="calendar-outline" text=""  screen="Timetable" navigation={navigation} badge={{}}  size={30} />
-      <Icons themec={theme.color} icon="school-outline" text="Program" screen="Program" navigation={navigation} badge={<></>}  size={20}/>
-      <Icons themec={theme.color}icon="person-outline" text="Me" screen="Me"  navigation={navigation} badge={<></>}   size={20}/>
+      <Icons themec={theme.name==="Paper"?COLORS.gray2:theme.color} icon="home-outline" text="Home" screen="Home" navigation={navigation} badge={<></>}  size={20}/>
+      <Icons themec={theme.name==="Paper"?COLORS.gray2:theme.color}icon="chatbox-ellipses-outline" text="Chat"  screen="Chat" navigation={navigation} badge={{}}  size={20}v />
+      <Icons themec={theme.name==="Paper"?COLORS.gray2:theme.color}icon="calendar-outline" text=""  screen="Timetable" navigation={navigation} badge={{}}  size={30} />
+      <Icons themec={theme.name==="Paper"?COLORS.gray2:theme.color} icon="school-outline" text="Program" screen="Program" navigation={navigation} badge={<></>}  size={20}/>
+      <Icons themec={theme.name==="Paper"?COLORS.gray2:theme.color}icon="person-outline" text="Me" screen="Me"  navigation={navigation} badge={<></>}   size={20}/>
     </View>
   );
 }

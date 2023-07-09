@@ -49,7 +49,7 @@ const Themes = ({navigation}) => {
         type: "MY_THEME",
         payload:item
       });
-    // 
+    navigation.navigate("Me")
    }
    useEffect(() => {
 

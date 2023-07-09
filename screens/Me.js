@@ -153,7 +153,7 @@ const Me = ({navigation}) => {
     }),
     right: animatedValue.interpolate({
       inputRange: [0, 100],
-      outputRange: [10, 1],
+      outputRange: [10, 0],
       extrapolate: 'clamp',
     }),
     top: animatedValue.interpolate({
@@ -318,15 +318,15 @@ const Me = ({navigation}) => {
         style={{zIndex:1}}
       >
     
-    <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={0} br={0}ph={10} mv={0} mh={0}>
-    <TextAtom text={`User settings`} c={COLORS.white} f="Roboto" s={SIZES.h1} w="500"  ls={-2}/>
+    <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={0} br={0}ph={15} mv={0} mh={0}>
+    <TextAtom text={`Utilities &  Preferences`} c={COLORS.white} f="Roboto" s={SIZES.h3} w="500"  ls={-1}/>
   </ViewAtom>
 
 
 
 <ViewAtom   bg="transparent" pv={0} br={0} mv={0} mh={5}>
    <Settings navigation={navigation} />
-   <Settings navigation={navigation} />
+   {/* <Settings navigation={navigation} /> */}
 
 
 
