@@ -11,8 +11,11 @@ import { ActivityIndicator } from 'react-native-paper';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import BottomTabs from '../components/Molecules/BottomTabs';
 import { ProgramsArray } from '../constants/content/programs';
+import Carousel from 'react-native-reanimated-carousel';
+import { useRef } from 'react';
 
 const Program = ({navigation}) => {
+  const programItems=["Guide","Resources","Resume"]
   const [program,setProgramName]=useState("")
   function getProgramByCode(programCode) {
     for (let i = 0; i < ProgramsArray.length; i++) {
@@ -31,15 +34,42 @@ const Program = ({navigation}) => {
     setchecking(false)
   }, 5000);
   }, []);
-    
+    const ProgramView=({item, navigation})=>{
+      return(
+        <ViewAtom fw="wrap" fd="row" jc="flex-start" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>
+     
+        <TextAtom text={item} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+        {/* <TextAtom text={program.programName} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-2}c={COLORS.white} /> */}
+             </ViewAtom>
+      )
+    }
+    const ref = useRef(null);
+    const [activeIndex,setActiveIndex]=useState(0)
+    useEffect(() => {
+      ref.current?.scrollTo({ index: activeIndex });
+    }, [activeIndex]);
   return (
     <View style={styles.container}>
-                 <LinearAtom  ai="center"  pv={5}  ph={10} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
+                 <LinearAtom   pv={5}  ph={20} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
                 <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>
      
      </ViewAtom>
-<TextAtom text={"Program"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
-<TextAtom text={program.programName} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+
+
+
+<Carousel
+        ref={ref}
+        loop={true}
+        width={SIZES.width-10}
+        height={SIZES.height}
+        autoPlay={false}
+        data={programItems}
+        scrollAnimationDuration={1000}
+        onSnapToItem={(index) => {
+          setActiveIndex(index);
+        }}
+        renderItem={({ item: item }) => <ProgramView item={item}  navigation={navigation} />}
+      />
         </LinearAtom>  
             
   <BottomTabs navigation={navigation} theme={COLORS.primary} />

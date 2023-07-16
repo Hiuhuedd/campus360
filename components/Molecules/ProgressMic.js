@@ -30,9 +30,11 @@ const ProgressMic = ({ theme }) => {
     }
   };
   const handlePlay = async () => {
-    const apiUrl = 'https://three60server.onrender.com/text-to-speech'; // Replace with your server URL
+    const apiUrl = 'http://192.168.43.222:3000/text-to-speech'; // Replace with your server URL
   
-    const text = `Hey ${user.firstName}! Buckle up for an exhilarating ride as a three sixty student, where you'll experience personal growth, unforgettable experiences, and a touch of digital wizardry. Create a student profile that grabs attention, showcase your skills, passions, and ambitions. Dive into a world of knowledge with our calendar feature, unlocking exciting events and forging connections. Ignite your competitive spirit with curated competitions and scholarships. Stay organized with a well-synced timetable system and conquer your classes. Be the captain of your own ship, guided by performance reports and analytics. Chat with our virtual assistant for advice and personalized recommendations. Conquer the job market with our support for resumes and job applications. Discover personalized learning recommendations tailored to your unique needs. Share your voice through feedback and ratings, shaping the future for fellow students. Uncover the "why" behind every endeavor, aligning your efforts with your dreams. Fasten your seatbelt, embrace the opportunities, connect with like-minded individuals, and let the remarkable journey of a three sixty student begin!  `;
+    // const text = `Hi ${user.firstName}. Experience the power of three sixty Student app! ... I am Bella, a personalized virtual assistant that revolutionizes your academic and career journey. Stay organized with the Smart Timetable feature, sync your program's schedule, and receive scheduled notifications. Connect with peers in the vibrant Peer Aid Community and earn while sharing knowledge. Explore networking opportunities with three sixty Events and gain insights through Performance Reports. Uncover your purpose with the captivating "Why" Feature and excel with Comprehensive Resume Building. Access student resources, customize themes, and chart your course with the Program Guide. three sixty student is built for you. Unleash your full potential now!  `;
+    const text=
+    "hey siz. i hope you know that mum is selling up the place. currently there are two customers; faith christian school and some neighbour from our street. faith christian wants the whole place at 2m cash by early next month while the neighbour buys just the front area at 2m, ready to pay 1m cash then pay the rest later on an agreement. mum asked for my input on this yesterday and i think we should just wait. the least i'd want is to have mum sell up the place and still have nothing to show for it or undergo so much friction in the process. the neighbour is very ready for the deal but i dont trust agreements and the brokers between. since mum's evaluation for the whole place is around 2.5m, i am suggesting that we do an agreement with faith christian instead. we ask them to pay up the 2m upfront and have the place as we wait for the balance on the agreed date. this is far less risky as both parties know each other, no brokers and  the transition is frictionless. we just have to wait. meanwhile if the neighbour sums up the full amount before faith christian, then we can consider their deal. "
     const voiceSettings = {
       stability: 0.5,
       similarity_boost: 0.5
@@ -42,7 +44,7 @@ const ProgressMic = ({ theme }) => {
       const response = await axios.post(apiUrl, {
         text: text,
         voiceSettings: voiceSettings,
-        voiceId:"21m00Tcm4TlvDq8ikWAM"
+        voiceId:"EXAVITQu4vr4xnSDxMaL"
       });
   
       if (response.data) {

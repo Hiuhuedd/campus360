@@ -310,8 +310,8 @@ const date2 = new Date(convertedDate);
 </ViewAtom>
 </ViewAtom>
 <ViewAtom fd="column" jc="space-between"  ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
-<Networks/>
-<Networks/>
+<Networks navigation={navigation} />
+<Networks navigation={navigation} />
 
 
 </ViewAtom>

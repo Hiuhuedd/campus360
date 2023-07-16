@@ -15,6 +15,7 @@ import Trail from "./screens/Chat";
 import Me from "./screens/Me";
 import Chat from "./screens/Chat";
 import Themes from "./screens/Themes";
+import Events from "./screens/Events";
 
 
 //Screens
@@ -41,6 +42,7 @@ export default function RootNavigation() {
           <Stack.Screen name="Program" component={Program} /> 
           <Stack.Screen name="Me" component={Me} /> 
           <Stack.Screen name="Chat" component={Chat} /> 
+          <Stack.Screen name="Events" component={Events} /> 
           <Stack.Screen name="Themes" component={Themes} /> 
           
         </Stack.Navigator>
