@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { promptFunction } from '../utils/360ai';
 import { getTimeSpans } from '../utils/timeFunction';
+import { getUserLocation } from '../utils/helper';
 
 
 function IntroScreen({navigation}) {
@@ -12,10 +13,24 @@ function IntroScreen({navigation}) {
 
   const [loader, setloader] = useState(false)
   useEffect(() => {
+    getUserLocation().then((res)=>{
+        if(res){
+         console.log(res);
+          dispatch({
+            type: "ON_UPDATE_LOCATION",
+            payload: {
+                location: res.item,
+                coords:res.coords,
+            },
+          });
+          }});
+  }, []);
+  useEffect(() => {
     getTimeSpans();
     setTimeout(() => {
       setloader(true)
      }, 2000);
+    
     AsyncStorage.getItem('Student').then(value => {
             if (value !== null) {
               dispatch({

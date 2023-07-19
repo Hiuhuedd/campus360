@@ -16,6 +16,8 @@ import Me from "./screens/Me";
 import Chat from "./screens/Chat";
 import Themes from "./screens/Themes";
 import Events from "./screens/Events";
+import Navigate from "./screens/Navigate";
+import ReferralScreen from "./screens/ReferralScreen";
 
 
 //Screens
@@ -44,6 +46,8 @@ export default function RootNavigation() {
           <Stack.Screen name="Chat" component={Chat} /> 
           <Stack.Screen name="Events" component={Events} /> 
           <Stack.Screen name="Themes" component={Themes} /> 
+          <Stack.Screen name="Navigate" component={Navigate} /> 
+          <Stack.Screen name="ReferralScreen" component={ReferralScreen} /> 
           
         </Stack.Navigator>
       

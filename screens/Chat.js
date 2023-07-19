@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, ScrollView ,TextInput} from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, ScrollView ,TextInput,Image} from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
@@ -10,7 +10,9 @@ import { Button } from '../components/Atoms/Button';
 import { ActivityIndicator } from 'react-native-paper';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import BottomTabs from '../components/Molecules/BottomTabs';
-
+import { text } from '../constants/content/textPrompts';
+import Slider from '@react-native-community/slider';
+import moment from 'moment';
 const Chat = ({navigation}) => {
     const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
@@ -38,16 +40,16 @@ const Chat = ({navigation}) => {
   const [inputText, setInputText] = useState('');
   const [chatMessages, setChatMessages] = useState([
     {
-      userId: 'user1',
+      userId: 'user2',
       name: 'John',
-      message: 'Hello there!',
+      message: `Hi ${user.firstName}, ${text}`,
       imageUrl: 'https://example.com/user1.jpg',
       time: '12:01 PM',
     },
     {
       userId: 'user2',
       name: 'Jane',
-      message: 'Hi John!',
+      message: `Hi ${user.firstName}!`,
       imageUrl: 'https://example.com/user2.jpg',
       time: '12:03 PM',
     },
@@ -58,153 +60,7 @@ const Chat = ({navigation}) => {
       imageUrl: 'https://example.com/user2.jpg',
       time: '12:04 PM',
     },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'I\'m good, thanks!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:05 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'Hello there!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:01 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'Hi John!',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:03 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'How are you?',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:04 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'I\'m good, thanks!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:05 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'Hello there!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:01 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'Hi John!',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:03 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'How are you?',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:04 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'I\'m good, thanks!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:05 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'Hello there!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:01 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'Hi John!',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:03 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'How are you?',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:04 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'I\'m good, thanks!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:05 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'Hello there!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:01 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'Hi John!',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:03 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'How are you?',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:04 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'I\'m good, thanks!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:05 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'Hello there!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:01 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'Hi John!',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:03 PM',
-    },
-    {
-      userId: 'user2',
-      name: 'Jane',
-      message: 'How are you?',
-      imageUrl: 'https://example.com/user2.jpg',
-      time: '12:04 PM',
-    },
-    {
-      userId: 'user1',
-      name: 'John',
-      message: 'I\'m good, thanks!',
-      imageUrl: 'https://example.com/user1.jpg',
-      time: '12:05 PM',
-    },
+    
     // Add more messages as needed
   ])
   const styles = StyleSheet.create({
@@ -218,10 +74,11 @@ const Chat = ({navigation}) => {
       padding: 5,
       borderRadius: 8,
       maxWidth: '80%',
+      
     },
     sentMessageContainer: {
       alignSelf: 'flex-end',
-      backgroundColor: '#DCF8C6',
+      backgroundColor: COLORS.gray4,
     },
     receivedMessageContainer: {
       alignSelf: 'flex-start',
@@ -258,6 +115,30 @@ const Chat = ({navigation}) => {
       color: '#FFFFFF',
       fontSize: 16,
     },
+    slider_view:{
+      // height:"10%",
+      width:"100%",
+      alignItems:"center",
+      flexDirection:"row",
+      // justifyContent:"flex-end"
+    },
+    slider_style:{
+      height:"70%",
+      width:"60%"
+    },
+    slider_time:{
+      fontSize:12,
+      marginLeft:"6%",
+      color:"#808080",
+      alignSelf:"flex-end"
+    },
+    Icon: {
+      width: 20,
+      height: 20,
+      borderRadius: 50,
+      // margin:-10
+    },
+
   });
   return (
     <View style={{ flexGrow: 1,}}>
@@ -265,13 +146,27 @@ const Chat = ({navigation}) => {
   <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
      
 </ViewAtom>
-  <ViewAtom fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mh={0}>
+  <ViewAtom fd="row" jc="flex-start" ai="center" w="100%" bg="transparent" ph={10} br={0} mh={0}>
      
-  <TextAtom text={"Chat.ai"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+  <TextAtom text={"360.ai"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
 </ViewAtom>
   <ScrollView contentContainerStyle={styles.container}>
 
 {chatMessages.map((message, index) => (
+  <>
+  <ViewAtom fd="row" jc={message.userId === 'user1' ? "flex-end":"flex-start"} ai="center" w="100%" bg="transparent" pv={0} br={0} mh={0}>
+  <View style={{position:"relative"}}>
+  <Image source={message.userId === 'user2' ?require('../assets/bella.jpg'):require('../assets/user.jpg')} style={[styles.Icon]} />
+  <View style={{position:"absolute",right:13,bottom:15}}>
+  <ViewAtom jc="center" ai="center"  bg={COLORS.rose} pv={3} ph={3} br={50} mh={0}></ViewAtom>
+  </View>
+  </View>
+  <ViewAtom jc="flex-start" ai="flex-start" mh={10}> 
+     <TextAtom text={message.userId === 'user2' ?"Bella   ":"You  "} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={-1}c={COLORS.white} />
+     <TextAtom text={moment(new Date()).format('h:mm a, DD-MM-YYYY ')} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.white} />
+  
+   </ViewAtom>
+   </ViewAtom>
   <View
     key={index}
     style={[
@@ -279,25 +174,43 @@ const Chat = ({navigation}) => {
       message.userId === 'user1' ? styles.sentMessageContainer : styles.receivedMessageContainer,
     ]}
   >
-      <TextAtom text={message.message}f="Poppins"s={SIZES.h5} w={"500"} c={COLORS.black} />
+      <TextAtom text={message.message}f="Poppins"s={SIZES.h5} w={"500"} ta={message.userId === 'user1' ?"right":"left"} c={COLORS.black} />
 
+      <View style={styles.slider_view}>
+      {message.userId === 'user1' ?<></> : <Icon name="play" type="ionicon" color={theme.color} size={SIZES.h2}  />}
+      {message.userId === 'user1' ?<></> :  
+                <Slider
+                  style={styles.slider_style}
+                  minimumValue={0}
+                  maximumValue={12.02}
+                  minimumTrackTintColor={theme.color}
+                  maximumTrackTintColor={theme.color}
+                  thumbTintColor={theme.color}
+                  value={3.5}
+                />}
+      
+
+           
+      <TextAtom text={moment(new Date()).format('h:mm a')} f="Poppins"s={SIZES.base} w={"500"} ta="right" ls={0}c={theme.color} />
+        </View>
   </View>
+  </>
 ))}
 
 </ScrollView>
 <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Type a message..."
+          placeholder="Type your prompt/response..."
           value={inputText}
           onChangeText={setInputText}
         />
         <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
         <Icon name="send" type="ionicon" color={COLORS.white} size={SIZES.h2}  />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
+        {/* <TouchableOpacity style={styles.sendButton} onPress={handleSend}>
         <Icon name="mic" type="ionicon" color={COLORS.white} size={SIZES.h2}  />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 </LinearAtom>  
             

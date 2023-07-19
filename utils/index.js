@@ -1,6 +1,6 @@
 
 export const BASE_URL = "http://192.168.43.102:8000/"  
-
+export const GOOGLE_MAP_KEY = "AIzaSyA5tg2gPu-u2dKFmcvi7UkEbdw7G_d0Ybk"
 
 export const getFeatureViewAnimation = (animatedValue, outputX) => {
     const TRANSLATE_X_INPUT_RANGE = [0, 80];

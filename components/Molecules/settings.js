@@ -11,14 +11,15 @@ const [selectedItem, setSelectedItem]=useState('')
 
 const settings=[
     {icon:"color-palette",name:"Themes",active:"Expolore up to generic 15 themes",number:"Atlantic" ,screen:"Themes"},
-    {icon:"navigate",name:"Navigate",active:"Find venues and places around school",number:"",screen:"Themes"},
+    {icon:"navigate",name:"Navigate",active:"Find venues and places around school",number:"",screen:"Navigate"},
     {icon:"hardware-chip",name:"360ai",active:"Customize 360ai to your preferences",number:""},
     {icon:"albums-outline",name:"Projects",active:"Create and view projects, group assignments and more",number:"",screen:"Themes"},
     {icon:"wifi",name:"Eduroam",active:"configure eduroam quick & easy ",number:"",screen:"Themes"},
-    {icon:"walk",name:"Invites",active:"Generate invite code, invite peers & earn",number:"",screen:"Themes"},
+    {icon:"walk",name:"Invites",active:"Generate invite code, invite peers & earn",number:"",screen:"ReferralScreen"},
     {icon:"newspaper",name:"Announcements",active:"Create announcements, ",number:"",screen:"Themes"},
     {icon:"key",name:"Premium",active:"Create announcements, ",number:"",screen:"Themes"},
     {icon:"link",name:"Important links",active:"Create announcements, ",number:"",screen:"Themes"},
+    {icon:"information-circle",name:"Help & Support",active:"Create announcements, ",number:"",screen:"Themes"},
 ]
 
     return(

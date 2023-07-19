@@ -14,6 +14,7 @@ import { timetable } from '../utils/timetable';
 import moment from 'moment';
 import ProgressMic from '../components/Molecules/ProgressMic';
 import CardAtom from '../components/Atoms/CardAtom';
+import PopUp from '../components/Molecules/PopUp';
 
 
 const AnimatedCard = Animated.createAnimatedComponent(View);
@@ -190,6 +191,13 @@ const date2 = new Date(convertedDate);
   }, []);
 
 
+  const handleSetFilter=(f)=>{
+    setFilter(f)
+  }
+ 
+const FilterArr=["events","projects","research"]
+  const [Filter, setFilter] = React.useState("");
+
   const params=63
   const defaultParams=180
   const tokens=36
@@ -295,7 +303,7 @@ const date2 = new Date(convertedDate);
  <ViewAtom   fd="row" ai="center"  bg={theme} pv={3} ph={3} br={50} mv={0} mh={0}>
  <TextAtom text={`see all  `} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
 
- <Icon name={"return-up-forward-outline"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {}} />
+ <Icon name={"return-up-forward-outline"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate("Timetable")}} />
 </ViewAtom>
 </ViewAtom>
 <ViewAtom   bg="transparent" pv={0} br={0} mv={0} mh={10}>
@@ -304,9 +312,19 @@ const date2 = new Date(convertedDate);
 
 <ViewAtom fd="row" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <TextAtom text={`My networks`}  c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
+<ViewAtom fd="row" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <ViewAtom fd="row" ai="center"  bg={theme} pv={3} ph={3} br={50} mv={0} mh={0}>
-<TextAtom text={`newest  `} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+<TextAtom text={`filter  `} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+
+ <Icon name={"filter"} type="ionicon" color={COLORS.white} size={SIZES.h3} />
+
+
+</ViewAtom>
+ {/* <PopUp handleSetItem={handleSetFilter} arr={FilterArr} /> */}
+<ViewAtom fd="row" ai="center"  bg={theme} pv={3} ph={3} br={50} mv={0} mh={0}>
+<TextAtom text={`    newest  `} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
  <Icon name={"swap-vertical-outline"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {}} />
+</ViewAtom>
 </ViewAtom>
 </ViewAtom>
 <ViewAtom fd="column" jc="space-between"  ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>

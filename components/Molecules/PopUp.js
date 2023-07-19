@@ -29,7 +29,7 @@ const [selectedItem, setSelectedItem]=useState('')
 export default PopUp
 const styles = StyleSheet.create({
     input: {
-      height: 50,
+      height: 0,
       width: '25%',
     },
   });

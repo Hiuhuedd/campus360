@@ -4,6 +4,42 @@ import { GOOGLE_MAP_KEY } from './index';
 import { ProgramsArray } from "../constants/content/programs";
 
 
+export const getUserLocation= async()=>{
+
+
+  let { status } = await Location.requestForegroundPermissionsAsync();
+
+  if (status !== 'granted'){
+      alert('Permission to access location is not granted')
+  }
+  
+  let location = await Location.getCurrentPositionAsync({});
+  
+  const { coords } = location
+
+  if(coords){
+
+      const { latitude, longitude} = coords;
+      let addressResponse = await Location.reverseGeocodeAsync({ latitude, longitude})
+      
+      for(let item of addressResponse){
+          let currentAddress = `${item.name}, ${item.city}, ${item.country}`
+          const currentAddressName= `${item.name}, ${item.city}`
+          console.log(coords)
+  
+   
+          
+          return {currentAddress,coords,item }
+  }    
+  }else{                                
+    console.log({currentAddress,coords,item });
+
+      //notify user something went wrong with location
+  }
+
+
+
+}
 
 export const greet=() =>{
   const time = new Date().getHours();

@@ -5,7 +5,7 @@ let defaultState = {
     timetable: timetable,
     user: {},
     location: {},
-    theme:{color:COLORS.dark,name:"Dark"},
+    theme:{color:COLORS.primary,name:"Atlantic"},
   };
 
 

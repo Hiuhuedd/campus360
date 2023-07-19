@@ -250,12 +250,10 @@ const Me = ({navigation}) => {
                 <AnimatedCard style={[{               
                     },featureIconAnimation]}> 
 
-         <ViewAtom  fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
+         <ViewAtom  fd="row" jc="space-between" ai="center" w="80%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
           <TextAtom text={greet()} f="Poppins"s={SIZES.h2} w={"500"}  ls={-2}c={COLORS.white} />
-              <ViewAtom  fd="row" jc="space-between" ai="center" w="40%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
+              <ViewAtom  fd="row" jc="space-around" ai="center" w="40%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
               <Icon name="create" type="ionicon" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h2} />
-              <Icon name="information-circle" type="ionicon" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h2} />
-              <Icon name="mail-unread" type="ionicon" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h2} />
               <Icon name="log-out" type="ionicon" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h2} />
      
                </ViewAtom>
