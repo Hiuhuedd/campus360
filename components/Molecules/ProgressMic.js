@@ -32,7 +32,7 @@ const ProgressMic = ({ theme }) => {
   const handlePlay = async () => {
     const apiUrl = 'http://192.168.43.222:3000/text-to-speech'; // Replace with your server URL
   
-    const text = `Hi ${user.firstName}. Experience the power of three sixty Student app! ... I am Bella, your personalized virtual assistant that revolutionizes your academic and career journey. Stay organized with the Smart Timetable feature, sync your program's schedule, and receive scheduled notifications. Connect with peers in the vibrant Peer Aid Community and earn while sharing knowledge. Explore networking opportunities with three sixty Events and gain insights through Performance Reports. Uncover your purpose with the captivating "Why" Feature and excel with Comprehensive Resume Building. Access student resources, customize themes, and chart your course with the Program Guide. three sixty student is built for you. Unleash your full potential now!  `;
+    const text = `Hi ${user.firstName}. Experience the power of three sixty Student! ... I am Bella, your personalized virtual assistant that revolutionizes your academic and career journey. Stay organized with the Smart Timetable feature, sync your program's schedule, and receive scheduled notifications. Connect with peers in the vibrant Peer Aid Community and earn while sharing knowledge. Explore networking opportunities with three sixty Events and gain insights through Performance Reports. Uncover your purpose with the captivating "Why" Feature and excel with Comprehensive Resume Building. Access student resources, customize themes, and chart your course with the Program Guide. three sixty student is built for you. Unleash your full potential now!  `;
    
     const voiceSettings = {
       stability: 0.5,
