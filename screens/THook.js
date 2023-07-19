@@ -15,7 +15,7 @@ const THook = ({navigation}) => {
    useEffect(() => {
   setTimeout(() => {
     setchecking(false)
-  }, 5000);
+  }, 1000);
   }, []);
   return (
     <View style={styles.container}>

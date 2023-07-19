@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, Image,StyleSheet ,TouchableOpacity} from 'react-native';
+import { View, Text, Image,StyleSheet ,TouchableOpacity,ActivityIndicator} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Permissions from 'expo-permissions';
 import QRCode from 'react-native-qrcode-svg';
@@ -8,12 +8,16 @@ import ViewAtom from '../components/Atoms/ViewAtom';
 import { COLORS, SIZES } from '../constants/theme';
 import { Icon } from 'react-native-elements';
 import TextAtom from '../components/Atoms/TextAtom';
+import { Button } from '../components/Atoms/Button';
+import { useSelector } from 'react-redux';
+
 const ReferralScreen = ({navigation}) => {
   const [qrCodeData, setQrCodeData] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned')
+  const theme=useSelector(state => state.userReducer.theme);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -35,20 +39,8 @@ const ReferralScreen = ({navigation}) => {
   };
 
   // Check permissions and return the screens
-  if (hasPermission === null) {
-    return (
-      <View style={styles.container}>
-        <Text>Requesting for camera permission</Text>
-      </View>)
-  }
-  if (hasPermission === false) {
-    return (
-      <View style={styles.container}>
-        <Text style={{ margin: 10 }}>No access to camera</Text>
-        <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
-      </View>)
-  }
-  
+ 
+ 
   return (
     <View style={{flex:1,marginTop:0,display:"flex",flexDirection:"column",}}>
       {/* Section for generating QR code signature */}
@@ -67,8 +59,21 @@ const ReferralScreen = ({navigation}) => {
   <TextAtom text={"Invites"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
   <TextAtom text={"Lets you keep track of your campus activities and much more.."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
  
+  {hasPermission === null? <ViewAtom  fd="column" jc="center" ai="center" w="100%" bg="transparent" pv={50} br={0} mv={5} mh={0}>
+     
+     <ActivityIndicator size="small" color={COLORS.amber} style={{marginBottom:20}} />
+     <TextAtom text={"Requesting for camera permission"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.gray2} />
+
+ </ViewAtom>:
+  <>
+  {hasPermission === false?<>
+    <Text style={{ margin: 10 }}>No access to camera</Text>
+        <Button title={'Allow Camera'} onPress={() => askForCameraPermission()} />
+  </>:
+  
+  <>
                 <ViewAtom  fd="column" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
-                <Icon name={"scan"} type="ionicon" color={COLORS.white} size={SIZES.largeTitle} onPress={() => {navigation.navigate('Me')}} />
+                {/* <Icon name={"scan"} type="ionicon" color={COLORS.white} size={SIZES.largeTitle} onPress={() => {navigation.navigate('Me')}} /> */}
 
      
      {!isScanning&& <QRCode value='https://www.github.com/chelseafarley' logo={require('../assets/360.png')}
@@ -85,12 +90,23 @@ const ReferralScreen = ({navigation}) => {
               style={{ height: 400, width: 400 }} />
           </View>
           )}
-           <TextAtom text={text} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
 
-{scanned && <Button title={'Scan again?'} onPress={() => setScanned(false)} color='tomato' />}
         </View>
       )}
      </ViewAtom>
+     <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>    
+     </ViewAtom>
+     <View style={{}} >
+
+     <Button text={!isScanning?"Start earning now":"Invites & revenue"}width={"100%"}bg={theme.color} navigation={navigation} screen={"InvitesOnboarding"} onMethodSelected={()=>{}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
+     </View>
+  </>
+  }
+  </>
+
+  }
+
+
      </LinearAtom>
     </View>
   );
@@ -110,10 +126,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: 300,
-        width: 300,
+        width: 304,
         overflow: 'hidden',
-        borderRadius: 20,
-        backgroundColor: 'tomato'
+        borderRadius: 30,
+        padding:0,
+        backgroundColor: COLORS.white
       }
   });
 export default ReferralScreen;
