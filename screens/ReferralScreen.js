@@ -44,7 +44,7 @@ const ReferralScreen = ({navigation}) => {
   return (
     <View style={{flex:1,marginTop:0,display:"flex",flexDirection:"column",}}>
       {/* Section for generating QR code signature */}
-      <LinearAtom   pv={5}  ph={20} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
+      <LinearAtom   pv={5}  ph={20} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
                 <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>    
      </ViewAtom>
 
@@ -57,11 +57,11 @@ const ReferralScreen = ({navigation}) => {
       </ViewAtom>
 </ViewAtom>
   <TextAtom text={"Invites"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
-  <TextAtom text={"Lets you keep track of your campus activities and much more.."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+  <TextAtom text={"Lets you keep track of your campus activities and much more.."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray} />
  
   {hasPermission === null? <ViewAtom  fd="column" jc="center" ai="center" w="100%" bg="transparent" pv={50} br={0} mv={5} mh={0}>
      
-     <ActivityIndicator size="small" color={COLORS.amber} style={{marginBottom:20}} />
+     <ActivityIndicator size="small" color={COLORS.white} style={{marginBottom:20}} />
      <TextAtom text={"Requesting for camera permission"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.gray2} />
 
  </ViewAtom>:
@@ -94,7 +94,11 @@ const ReferralScreen = ({navigation}) => {
         </View>
       )}
      </ViewAtom>
-     <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>    
+     <ViewAtom  fd="column" jc="flex-start" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>    
+    
+     <TextAtom text={"Refer-a-Friend Program  "} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={-2}c={COLORS.white} />
+     <TextAtom text={"Invite your friends and peers to 360 student app and earn fast passive cash."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+
      </ViewAtom>
      <View style={{}} >
 

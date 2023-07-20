@@ -19,6 +19,7 @@ import Events from "./screens/Events";
 import Navigate from "./screens/Navigate";
 import ReferralScreen from "./screens/ReferralScreen";
 import InvitesOnboarding from "./screens/InvitesOnboarding";
+import Tokens from "./screens/Tokens";
 
 
 //Screens
@@ -50,6 +51,7 @@ export default function RootNavigation() {
           <Stack.Screen name="Navigate" component={Navigate} /> 
           <Stack.Screen name="ReferralScreen" component={ReferralScreen} /> 
           <Stack.Screen name="InvitesOnboarding" component={InvitesOnboarding} /> 
+          <Stack.Screen name="Tokens" component={Tokens} /> 
           
         </Stack.Navigator>
       
